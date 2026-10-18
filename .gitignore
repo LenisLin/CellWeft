@@ -1,0 +1,42 @@
+# Local references and third-party checkouts
+/reference/
+/third_party/*
+!/third_party/README.md
+
+# Local settings, agent state and credentials
+/configs/paths.local.yaml
+/.agents/
+/.codex/
+/.aws/
+.env
+.env.*
+!.env.example
+
+# Environments and generated files
+.venv/
+.venv-*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.cache/
+build/
+dist/
+*.egg-info/
+.DS_Store
+
+# Runtime artifacts belong on NAS
+/data/
+/outputs/
+/results/
+/checkpoints/
+/wandb/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.h5ad
+*.h5
+*.zarr/

@@ -1,0 +1,4 @@
+# Machine-specific template; copy to paths.local.yaml and edit as needed.
+# Runtime configuration loading will be implemented with the model pipeline.
+data_root: /mnt/NAS_21T/ProjectData/CellWeft
+scratch_root: /home/lenislin/Experiment/projects/CellWeft/.cache
