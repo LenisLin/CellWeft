@@ -1,7 +1,7 @@
 {
   "ssd": [
     "docs/project/discussions", "docs/architecture", "docs/data",
-    "docs/evaluation", "docs/experiments", "docs/development", "docs/archive",
+    "docs/evaluation", "docs/experiments", "docs/development",
     "configs/data", "configs/model", "configs/train", "configs/optimization",
     "configs/evaluation", "configs/edits", "configs/experiments",
     "src/cellweft/data", "src/cellweft/models", "src/cellweft/objectives",
@@ -14,7 +14,7 @@
   ],
   "nas": [
     "raw/public", "raw/private", "metadata/public", "metadata/private",
-    "metadata/splits", "interim", "processed/public", "processed/private",
+    "metadata/splits", "interim", "processed",
     "resources/protein_banks", "resources/knowledge", "resources/pretrained",
     "training/prepared", "training/runs", "embeddings", "results", "cache"
   ]

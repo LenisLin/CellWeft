@@ -18,10 +18,15 @@
 ## Implementation and verification
 
 - Keep reusable behavior in `src/cellweft/`; scripts orchestrate specific datasets or experiments. Source modules do not import scripts.
-- Preserve the accepted DINOv3, dual-encoder, fusion and synchronized-edit contracts in the research plan. Official image training is integrated through an adapter, not replaced by a custom toy trainer.
+- Follow the current model, training, data and editing specifications linked from docs/README.md. The research plan owns scientific scope; archived prompts are not current implementation instructions.
 - Define observable success criteria, make the smallest necessary change, and run the narrowest meaningful checks.
 - Distinguish planned, implemented, tested, trained and biologically validated states. Report skipped or failed checks accurately.
 - Update the owning specification for contract changes; record the rationale in `decisions.md`. Update `status.md` with verified progress and the next concrete step.
+
+- Keep environment changes project-local; do not use sudo or change system/global environments for initialization.
+- Initialization does not automatically download large datasets or weights, start full training, create automated tasks, or upload private data/embeddings. Trackers default to offline/disabled; report missing dependencies explicitly.
+- Use Chinese for README and research documents, English for code identifiers and commit messages, and typed public interfaces with focused comments.
+- Record bootstrap hyperparameters as provisional in the owning model/training specification and link the choice from decisions.md; do not treat them as accepted production settings.
 
 ## Git and GitHub
 
