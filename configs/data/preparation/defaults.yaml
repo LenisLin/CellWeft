@@ -1,0 +1,29 @@
+# Scientific rules are fixed; runtime/IO values are implementation starting points.
+normalization:
+  percentile: 99.5
+  method: linear
+  lower: 0
+neighbors:
+  k: 20
+crop:
+  size: 224
+  stride: 112
+io:
+  tile_size: 256
+  block_size: 512
+  compression: deflate
+runtime:
+  cpu_workers: 1
+segmentation:
+  diameter: null
+  bsize: 256
+  batch_size: 4
+  tile_overlap: 0.1
+  flow_threshold: 0.4
+  cellprob_threshold: 0.0
+  min_size: 15
+  max_size_fraction: 0.4
+  resample: true
+  augment: false
+  niter: null
+  do_3D: false
