@@ -1,0 +1,80 @@
+schema_version: 1
+verified_on: '2026-10-18'
+map:
+  role: selected fixed protein embedding provider
+  paper: https://www.nature.com/articles/s42256-026-01286-w
+  repository: https://github.com/MAGIC-AI4Med/MAP
+  revision: 629ebdc1617eaf89825185a1512d772eccc3dc7e
+  checkout: third_party/map
+  code_license: MIT
+  weights_license: No separate weight license stated in the inspected release; do
+    not infer from the code license.
+  weights_folder: https://drive.google.com/drive/folders/1cV0ZTk92PguKS2nyii6dLV0IfqoSDHsQ
+  assets:
+  - filename: mapkg_encoder_v3.pt
+    source: https://drive.google.com/file/d/18vL792x-g81SWCpzPvgUbHq3jbR45ttx/view
+    bytes: 1126763160
+    sha256: 118d14ea3756a63d39044660254951a18340f59b136c391ae3f2578f6d19219b
+    download_date: '2026-10-18'
+    path: resources/pretrained/map/mapkg_v3/mapkg_encoder_v3.pt
+  - filename: Homo_sapiens.GRCh38.gene_symbol_to_embedding_ESM2.pt
+    source: https://drive.google.com/file/d/1unE_thvEPznBeKcLakzFueB9KW9jky47/view
+    bytes: 410886729
+    sha256: a210e1cc7901513999b2bca3836ba9e2f203cd008be4e9a9d6412a2267de9748
+    download_date: '2026-10-18'
+    path: resources/pretrained/map/mapkg_v3/Homo_sapiens.GRCh38.gene_symbol_to_embedding_ESM2.pt
+  protein_bank:
+    path: resources/protein_banks/map_gene_projector_v1
+    key_type: gene_symbol
+    rows: 19790
+    dimension: 1024
+    normalization: raw projector output
+    status: exported_and_checked_against_official_projector
+    marker_mapping: pending panel-specific mapping
+map_kg:
+  repository: https://huggingface.co/datasets/RainGate/MAP-KG
+  revision: 2a9af1bd2645fef86fab495b85a1b08a52356e26
+  declared_license: apache-2.0
+  path: resources/knowledge/map_kg
+  downloaded_files:
+  - README.md
+  - GENE_tahoe_filtered.csv
+dinov3:
+  role: requested LVD-1689M pretrained B/L resources; initialization policy not changed
+  repository: https://github.com/facebookresearch/dinov3
+  revision: 6876159a11b4df116f30f667f8c9888617df0751
+  checkout: third_party/dinov3
+  license: DINOv3 License Agreement; see upstream LICENSE.md
+  weights:
+    vitb16:
+      status: awaiting_account_approval
+      dataset: LVD-1689M
+      embedding_dimension: 768
+      official_url: https://dl.fbaipublicfiles.com/dinov3/dinov3_vitb16/dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth
+      filename: dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth
+      filename_sha256_prefix: 73cec8be
+      target_path: resources/pretrained/dinov3/vitb16_lvd1689m/pytorch/dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth
+      huggingface_repository: facebook/dinov3-vitb16-pretrain-lvd1689m
+      huggingface_revision: 5931719e67bbdb9737e363e781fb0c67687896bc
+      observed_access:
+        initial_official_http_status: 403
+        initial_unauthenticated_huggingface_http_status: 401
+        cellweft_hf_login_verified: true
+        authenticated_download_result: 'Access denied: model requires approval'
+      huggingface_target_path: resources/pretrained/dinov3/vitb16_lvd1689m/huggingface
+    vitl16:
+      status: awaiting_account_approval
+      dataset: LVD-1689M
+      embedding_dimension: 1024
+      official_url: https://dl.fbaipublicfiles.com/dinov3/dinov3_vitl16/dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth
+      filename: dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth
+      filename_sha256_prefix: 8aa4cbdd
+      target_path: resources/pretrained/dinov3/vitl16_lvd1689m/pytorch/dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth
+      huggingface_repository: facebook/dinov3-vitl16-pretrain-lvd1689m
+      huggingface_revision: ea8dc2863c51be0a264bab82070e3e8836b02d51
+      observed_access:
+        initial_official_http_status: 403
+        initial_unauthenticated_huggingface_http_status: 401
+        cellweft_hf_login_verified: true
+        authenticated_download_result: 'Access denied: model requires approval'
+      huggingface_target_path: resources/pretrained/dinov3/vitl16_lvd1689m/huggingface

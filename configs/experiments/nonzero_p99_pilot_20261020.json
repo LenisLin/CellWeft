@@ -1,0 +1,5187 @@
+{
+  "pilot_root": "/mnt/NAS_21T/ProjectData/CellWeft/results/segmentation_pilot_20261019/run01",
+  "output": "/mnt/NAS_21T/ProjectData/CellWeft/results/nonzero_p99_pilot_20261020/run02",
+  "mask_scheme": "CP_B",
+  "normalization": "two comparison methods, neither subtracts P1",
+  "statistical_domain": "original segmentation-pilot ROI; NOT full-slide statistics for cropped cases",
+  "quantification": "arithmetic mean of all pixels in each positive instance label, including zero intensity",
+  "additional_transform": null,
+  "degenerate_channel": "all-zero input remains zero for both methods; nonempty channel with all-pixel P99=0 is NaN only in comparator",
+  "marker_scope": "retain identifiable protein measurements including mixtures and protein families; preserve source labels without pretending they are single-gene measurements",
+  "samples": [
+    {
+      "sample_id": "Danenberg2022_imc",
+      "study": "Danenberg2022_IMC_BreastCancer",
+      "technology": "IMC",
+      "source": {
+        "kind": "zarr",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Danenberg2022_IMC_BreastCancer/spora/imc/1_0mpp/images/danenberg2022breast_aaicidhk_0000.ome.zarr/0",
+        "indices": [
+          37,
+          38,
+          35,
+          1,
+          20
+        ],
+        "source_shape": [
+          39,
+          581,
+          516
+        ],
+        "roi": [
+          0,
+          0,
+          516,
+          581
+        ],
+        "mpp": 1.0,
+        "mpp_evidence": {
+          "status": "source_resolution_contract",
+          "unit": "um/px",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Danenberg2022_IMC_BreastCancer/spora/imc/1_0mpp/images/danenberg2022breast_aaicidhk_0000.ome.zarr/zarr.json"
+          ],
+          "basis": "Original IMC release at 1 um/px, with matching embedded NGFF spatial scale [1,1] in micrometers."
+        },
+        "source_phase": "published_spora_intensities_at_original_resolution; upstream_processing_not_repeated",
+        "panel_id": "Danenberg2022_IMC_BreastCancer:39_channel_source_panel",
+        "channel_names": [
+          "DNA1",
+          "DNA2",
+          "panCK",
+          "SMA",
+          "CD45RA"
+        ],
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "DNA1",
+        "DNA2",
+        "panCK",
+        "SMA",
+        "CD45RA"
+      ],
+      "mpp": 1.0,
+      "roi": [
+        0,
+        0,
+        516,
+        581
+      ],
+      "source_shape": [
+        39,
+        581,
+        516
+      ],
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "H3",
+          "marker_label": "H3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "SMA",
+          "marker_label": "SMA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "CK5",
+          "marker_label": "CK5",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "CD38",
+          "marker_label": "CD38",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "HLA-DR",
+          "marker_label": "HLA-DR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "CK8/18",
+          "marker_label": "CK8/18",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 6,
+          "source_name": "CD15",
+          "marker_label": "CD15",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "FSP1",
+          "marker_label": "FSP1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "CD163",
+          "marker_label": "CD163",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "ICOS",
+          "marker_label": "ICOS",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "CD134",
+          "marker_label": "CD134",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "HER2 (V2)",
+          "marker_label": "HER2 (V2)",
+          "include": false,
+          "exclusion_reason": "duplicate HER2 measurement; retain source channel 19",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "CD3e",
+          "marker_label": "CD3e",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "PDPN",
+          "marker_label": "PDPN",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "CD11c",
+          "marker_label": "CD11c",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "PD-1",
+          "marker_label": "PD-1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "GITR",
+          "marker_label": "GITR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "CD16",
+          "marker_label": "CD16",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "HER2",
+          "marker_label": "HER2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "CD45RA",
+          "marker_label": "CD45RA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "B2M",
+          "marker_label": "B2M",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "CD45RO",
+          "marker_label": "CD45RO",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "FOXP3",
+          "marker_label": "FOXP3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "CD20",
+          "marker_label": "CD20",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "ER",
+          "marker_label": "ER",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "CD8",
+          "marker_label": "CD8",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "CD57",
+          "marker_label": "CD57",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "Ki-67",
+          "marker_label": "Ki-67",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "PDGFRB",
+          "marker_label": "PDGFRB",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 30,
+          "source_name": "CAV1",
+          "marker_label": "CAV1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 31,
+          "source_name": "CD4",
+          "marker_label": "CD4",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 32,
+          "source_name": "CD31+vWF",
+          "marker_label": "CD31+vWF",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 33,
+          "source_name": "CXCL12",
+          "marker_label": "CXCL12",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 34,
+          "source_name": "HLA-ABC",
+          "marker_label": "HLA-ABC",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 35,
+          "source_name": "panCK",
+          "marker_label": "panCK",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 36,
+          "source_name": "cCasp3+cPARP",
+          "marker_label": "cCasp3+cPARP",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 37,
+          "source_name": "DNA1",
+          "marker_label": "DNA1",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 38,
+          "source_name": "DNA2",
+          "marker_label": "DNA2",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        }
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Danenberg2022_IMC_BreastCancer/spora_inventory/imc_ordered_marker_names.json"
+    },
+    {
+      "sample_id": "Hoch2022_imc",
+      "study": "Hoch2022_IMC_Melanoma",
+      "technology": "IMC",
+      "source": {
+        "kind": "zarr",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Hoch2022_IMC_Melanoma/spora/imc/1_0mpp/images/hoch2022multiplexed_axewopxv_0000.ome.zarr/0",
+        "indices": [
+          37,
+          38,
+          10,
+          6,
+          0
+        ],
+        "source_shape": [
+          41,
+          986,
+          903
+        ],
+        "roi": [
+          0,
+          0,
+          903,
+          986
+        ],
+        "mpp": 1.0,
+        "mpp_evidence": {
+          "status": "source_resolution_contract",
+          "unit": "um/px",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Hoch2022_IMC_Melanoma/spora/imc/1_0mpp/images/hoch2022multiplexed_axewopxv_0000.ome.zarr/zarr.json"
+          ],
+          "basis": "Original IMC release at 1 um/px, with matching embedded NGFF spatial scale [1,1] in micrometers."
+        },
+        "source_phase": "published_spora_intensities_at_original_resolution; upstream_processing_not_repeated",
+        "panel_id": "Hoch2022_IMC_Melanoma:41_channel_source_panel",
+        "channel_names": [
+          "DNA1",
+          "DNA2",
+          "B2M",
+          "S100",
+          "VIM"
+        ],
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "DNA1",
+        "DNA2",
+        "B2M",
+        "S100",
+        "VIM"
+      ],
+      "mpp": 1.0,
+      "roi": [
+        0,
+        0,
+        903,
+        986
+      ],
+      "source_shape": [
+        41,
+        986,
+        903
+      ],
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "VIM",
+          "marker_label": "VIM",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "H3",
+          "marker_label": "H3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "SMA",
+          "marker_label": "SMA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "CK5",
+          "marker_label": "CK5",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "CD38",
+          "marker_label": "CD38",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "HLA-DR",
+          "marker_label": "HLA-DR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 6,
+          "source_name": "S100",
+          "marker_label": "S100",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 7,
+          "source_name": "CDH11",
+          "marker_label": "CDH11",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "FAP",
+          "marker_label": "FAP",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "CD163",
+          "marker_label": "CD163",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "B2M",
+          "marker_label": "B2M",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "CD134",
+          "marker_label": "CD134",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "SLC2A12",
+          "marker_label": "SLC2A12",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "CD3e",
+          "marker_label": "CD3e",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "LAG3",
+          "marker_label": "LAG3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "PD-1",
+          "marker_label": "PD-1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "CCL4mRNA",
+          "marker_label": "CCL4mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "CCL18mRNA",
+          "marker_label": "CCL18mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "CCR2",
+          "marker_label": "CCR2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "PD-L1",
+          "marker_label": "PD-L1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "CXCL8mRNA",
+          "marker_label": "CXCL8mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "CXCL10mRNA",
+          "marker_label": "CXCL10mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "CXCL12mRNA",
+          "marker_label": "CXCL12mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "CXCL13mRNA",
+          "marker_label": "CXCL13mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "CD8",
+          "marker_label": "CD8",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "CCL2mRNA",
+          "marker_label": "CCL2mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "CCL22mRNA",
+          "marker_label": "CCL22mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "CXCL9mRNA",
+          "marker_label": "CXCL9mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "DapBmRNA",
+          "marker_label": "DapBmRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 30,
+          "source_name": "SOX10",
+          "marker_label": "SOX10",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 31,
+          "source_name": "CCL8mRNA",
+          "marker_label": "CCL8mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 32,
+          "source_name": "CD31",
+          "marker_label": "CD31",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 33,
+          "source_name": "CCL19mRNA",
+          "marker_label": "CCL19mRNA",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 34,
+          "source_name": "MLANA",
+          "marker_label": "MLANA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 35,
+          "source_name": "p-Rb",
+          "marker_label": "p-Rb",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 36,
+          "source_name": "c-PARP",
+          "marker_label": "c-PARP",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 37,
+          "source_name": "DNA1",
+          "marker_label": "DNA1",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 38,
+          "source_name": "DNA2",
+          "marker_label": "DNA2",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 39,
+          "source_name": "CD15",
+          "marker_label": "CD15",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 40,
+          "source_name": "MPO",
+          "marker_label": "MPO",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        }
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Hoch2022_IMC_Melanoma/spora_inventory/imc_ordered_marker_names.json"
+    },
+    {
+      "sample_id": "Jackson2020_imc",
+      "study": "Jackson2020_IMC_BreastCancer",
+      "technology": "IMC",
+      "source": {
+        "kind": "zarr",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Jackson2020_IMC_BreastCancer/spora/imc/1_0mpp/images/jackson2020single_abertbeh_0000.ome.zarr/0",
+        "indices": [
+          37,
+          38,
+          22,
+          27,
+          35
+        ],
+        "source_shape": [
+          39,
+          714,
+          881
+        ],
+        "roi": [
+          0,
+          0,
+          881,
+          714
+        ],
+        "mpp": 1.0,
+        "mpp_evidence": {
+          "status": "source_resolution_contract",
+          "unit": "um/px",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Jackson2020_IMC_BreastCancer/spora/imc/1_0mpp/images/jackson2020single_abertbeh_0000.ome.zarr/zarr.json"
+          ],
+          "basis": "Original IMC release at 1 um/px, with matching embedded NGFF spatial scale [1,1] in micrometers."
+        },
+        "source_phase": "published_spora_intensities_at_original_resolution; upstream_processing_not_repeated",
+        "panel_id": "Jackson2020_IMC_BreastCancer:39_channel_source_panel",
+        "channel_names": [
+          "DNA1",
+          "DNA2",
+          "CD45",
+          "E-Cadherin/P-Cadherin",
+          "panCK"
+        ],
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "DNA1",
+        "DNA2",
+        "CD45",
+        "E-Cadherin/P-Cadherin",
+        "panCK"
+      ],
+      "mpp": 1.0,
+      "roi": [
+        0,
+        0,
+        881,
+        714
+      ],
+      "source_shape": [
+        39,
+        714,
+        881
+      ],
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "Histone H3",
+          "marker_label": "Histone H3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "H3 (Lys28) trimethylate",
+          "marker_label": "H3 (Lys28) trimethylate",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "Cytokeratin 5",
+          "marker_label": "Cytokeratin 5",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "Fibronectin",
+          "marker_label": "Fibronectin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "Cytokeratin 19",
+          "marker_label": "Cytokeratin 19",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "Cytokeratin 8/18",
+          "marker_label": "Cytokeratin 8/18",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 6,
+          "source_name": "Twist",
+          "marker_label": "Twist",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "Keratin 14 (KRT14)",
+          "marker_label": "Keratin 14 (KRT14)",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "SMA",
+          "marker_label": "SMA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "Vimentin",
+          "marker_label": "Vimentin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "c-Myc",
+          "marker_label": "c-Myc",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "HER2",
+          "marker_label": "HER2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "CD3E",
+          "marker_label": "CD3E",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "pH3 (Ser28)",
+          "marker_label": "pH3 (Ser28)",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "pErk1/2",
+          "marker_label": "pErk1/2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 16,
+          "source_name": "Slug",
+          "marker_label": "Slug",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "Rabbit IgG H L",
+          "marker_label": "Rabbit IgG H L",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "PR A/B",
+          "marker_label": "PR A/B",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "p53",
+          "marker_label": "p53",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "CD44",
+          "marker_label": "CD44",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "EpCAM",
+          "marker_label": "EpCAM",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "CD45",
+          "marker_label": "CD45",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "GATA3",
+          "marker_label": "GATA3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "CD20",
+          "marker_label": "CD20",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "b-Catenin",
+          "marker_label": "b-Catenin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "CA9",
+          "marker_label": "CA9",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "E-Cadherin/P-Cadherin",
+          "marker_label": "E-Cadherin/P-Cadherin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 28,
+          "source_name": "Ki-67",
+          "marker_label": "Ki-67",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "EGFR",
+          "marker_label": "EGFR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 30,
+          "source_name": "pS6",
+          "marker_label": "pS6",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 31,
+          "source_name": "Sox9",
+          "marker_label": "Sox9",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 32,
+          "source_name": "vWF+CD31",
+          "marker_label": "vWF+CD31",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 33,
+          "source_name": "p-mTOR",
+          "marker_label": "p-mTOR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 34,
+          "source_name": "Cytokeratin 7",
+          "marker_label": "Cytokeratin 7",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 35,
+          "source_name": "panCK",
+          "marker_label": "panCK",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 36,
+          "source_name": "cPARP+cCasp3",
+          "marker_label": "cPARP+cCasp3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 37,
+          "source_name": "DNA1",
+          "marker_label": "DNA1",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 38,
+          "source_name": "DNA2",
+          "marker_label": "DNA2",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        }
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Jackson2020_IMC_BreastCancer/spora_inventory/imc_ordered_marker_names.json"
+    },
+    {
+      "sample_id": "Schurch2020_codex",
+      "study": "Schurch2020_CODEX_ColorectalCancer",
+      "technology": "CODEX",
+      "source": {
+        "kind": "zarr",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Schurch2020_CODEX_ColorectalCancer/spora/codex/0_37744mpp/images/schurch2020coordinated_allkfoxu_0000.ome.zarr/0",
+        "indices": [
+          41,
+          49,
+          20,
+          33
+        ],
+        "source_shape": [
+          58,
+          1440,
+          1920
+        ],
+        "roi": [
+          192,
+          0,
+          1536,
+          1440
+        ],
+        "mpp": 0.37744,
+        "mpp_evidence": {
+          "status": "source_tissue_metadata_original_mpp",
+          "unit": "um/px",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Schurch2020_CODEX_ColorectalCancer/spora_inventory/metadata/tissues.parquet"
+          ],
+          "basis": "Exact tissue_id/modality=codex row: original_mpp=0.37744. Native array CYX=[58,1440,1920]; matching 1_mpp array=[58,543,724]. Native embedded scale [1,1] conflicts with source original_mpp and is not used."
+        },
+        "source_phase": "published_spora_intensities_at_original_resolution; upstream_processing_not_repeated",
+        "panel_id": "Schurch2020_CODEX_ColorectalCancer:58_channel_source_panel",
+        "channel_names": [
+          "HOECHST2",
+          "NA-K-ATPASE",
+          "CD45",
+          "CYTOKERATIN"
+        ],
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "HOECHST2",
+        "NA-K-ATPASE",
+        "CD45",
+        "CYTOKERATIN"
+      ],
+      "mpp": 0.37744,
+      "roi": [
+        192,
+        0,
+        1536,
+        1440
+      ],
+      "source_shape": [
+        58,
+        1440,
+        1920
+      ],
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "ASMA",
+          "marker_label": "ASMA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "BCL-2",
+          "marker_label": "BCL-2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "BETA-CATENIN",
+          "marker_label": "BETA-CATENIN",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "CD11B",
+          "marker_label": "CD11B",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "CD11C",
+          "marker_label": "CD11C",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "CD138",
+          "marker_label": "CD138",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 6,
+          "source_name": "CD15",
+          "marker_label": "CD15",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "CD163",
+          "marker_label": "CD163",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "CD194",
+          "marker_label": "CD194",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "CD2",
+          "marker_label": "CD2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "CD20",
+          "marker_label": "CD20",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "CD21",
+          "marker_label": "CD21",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "CD25",
+          "marker_label": "CD25",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "CD3",
+          "marker_label": "CD3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "CD30",
+          "marker_label": "CD30",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "CD31",
+          "marker_label": "CD31",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "CD34",
+          "marker_label": "CD34",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "CD38",
+          "marker_label": "CD38",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "CD4",
+          "marker_label": "CD4",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "CD44",
+          "marker_label": "CD44",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "CD45",
+          "marker_label": "CD45",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "CD45RA",
+          "marker_label": "CD45RA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "CD45RO",
+          "marker_label": "CD45RO",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "CD5",
+          "marker_label": "CD5",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "CD56",
+          "marker_label": "CD56",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "CD57",
+          "marker_label": "CD57",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "CD7",
+          "marker_label": "CD7",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "CD71",
+          "marker_label": "CD71",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "CD8",
+          "marker_label": "CD8",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 30,
+          "source_name": "CDX2",
+          "marker_label": "CDX2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 31,
+          "source_name": "CHROMOGRANIN A",
+          "marker_label": "CHROMOGRANIN A",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 32,
+          "source_name": "COLLAGEN IV",
+          "marker_label": "COLLAGEN IV",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 33,
+          "source_name": "CYTOKERATIN",
+          "marker_label": "CYTOKERATIN",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 34,
+          "source_name": "DRAQ5",
+          "marker_label": "DRAQ5",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 35,
+          "source_name": "EGFR",
+          "marker_label": "EGFR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 36,
+          "source_name": "FOXP3",
+          "marker_label": "FOXP3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 37,
+          "source_name": "GATA3",
+          "marker_label": "GATA3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 38,
+          "source_name": "GFAP",
+          "marker_label": "GFAP",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 39,
+          "source_name": "GRANZYME B",
+          "marker_label": "GRANZYME B",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 40,
+          "source_name": "HLA-DR",
+          "marker_label": "HLA-DR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 41,
+          "source_name": "HOECHST2",
+          "marker_label": "HOECHST2",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 42,
+          "source_name": "ICOS",
+          "marker_label": "ICOS",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 43,
+          "source_name": "IDO-1",
+          "marker_label": "IDO-1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 44,
+          "source_name": "KI67",
+          "marker_label": "KI67",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 45,
+          "source_name": "LAG-3",
+          "marker_label": "LAG-3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 46,
+          "source_name": "MMP12",
+          "marker_label": "MMP12",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 47,
+          "source_name": "MMP9",
+          "marker_label": "MMP9",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 48,
+          "source_name": "MUC-1",
+          "marker_label": "MUC-1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 49,
+          "source_name": "NA-K-ATPASE",
+          "marker_label": "NA-K-ATPASE",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 50,
+          "source_name": "P53",
+          "marker_label": "P53",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 51,
+          "source_name": "PD-1",
+          "marker_label": "PD-1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 52,
+          "source_name": "PD-L1",
+          "marker_label": "PD-L1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 53,
+          "source_name": "PODOPLANIN",
+          "marker_label": "PODOPLANIN",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 54,
+          "source_name": "SYNAPTOPHYSIN",
+          "marker_label": "SYNAPTOPHYSIN",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 55,
+          "source_name": "T-BET",
+          "marker_label": "T-BET",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 56,
+          "source_name": "VIMENTIN",
+          "marker_label": "VIMENTIN",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 57,
+          "source_name": "VISTA",
+          "marker_label": "VISTA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        }
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Schurch2020_CODEX_ColorectalCancer/spora_inventory/codex_ordered_marker_names.json"
+    },
+    {
+      "sample_id": "Monkman2024_codex",
+      "study": "Monkman2024_CODEX_NSCLC",
+      "technology": "CODEX",
+      "source": {
+        "kind": "zarr",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Monkman2024_CODEX_NSCLC/spora/codex/0_3775mpp/images/monkman2024spatial_axockjnn_0000.ome.zarr/0",
+        "indices": [
+          25,
+          19,
+          31,
+          36
+        ],
+        "source_shape": [
+          37,
+          3024,
+          2688
+        ],
+        "roi": [
+          576,
+          744,
+          1536,
+          1536
+        ],
+        "mpp": 0.3775,
+        "mpp_evidence": {
+          "status": "published_source_resolution_contract",
+          "unit": "um/px",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/cache/collection_20261018/spora_inventory/monkman2024spatial/native_evidence.json"
+          ],
+          "basis": "Source inventory binds spora-submissions/monkman2024spatial/codex/0_3775mpp/images/ to highest_published_mpp=0.3775; actual native shape checked. Embedded NGFF [1,1] is inconsistent and not used. No independent microscope-calibration audit."
+        },
+        "source_phase": "published_spora_intensities_at_original_resolution; upstream_processing_not_repeated",
+        "panel_id": "Monkman2024_CODEX_NSCLC:37_channel_source_panel",
+        "channel_names": [
+          "DAPI2",
+          "CD45",
+          "PanCK",
+          "Vimentin"
+        ],
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "DAPI2",
+        "CD45",
+        "PanCK",
+        "Vimentin"
+      ],
+      "mpp": 0.3775,
+      "roi": [
+        576,
+        744,
+        1536,
+        1536
+      ],
+      "source_shape": [
+        37,
+        3024,
+        2688
+      ],
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "CD107a",
+          "marker_label": "CD107a",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "CD117",
+          "marker_label": "CD117",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "CD11b",
+          "marker_label": "CD11b",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "CD11c",
+          "marker_label": "CD11c",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "CD14",
+          "marker_label": "CD14",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "CD141",
+          "marker_label": "CD141",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 6,
+          "source_name": "CD15",
+          "marker_label": "CD15",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "CD163",
+          "marker_label": "CD163",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "CD183",
+          "marker_label": "CD183",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "CD197",
+          "marker_label": "CD197",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "CD20",
+          "marker_label": "CD20",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "CD21",
+          "marker_label": "CD21",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "CD25",
+          "marker_label": "CD25",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "CD31",
+          "marker_label": "CD31",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "CD34",
+          "marker_label": "CD34",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "CD38",
+          "marker_label": "CD38",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "CD3e",
+          "marker_label": "CD3e",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "CD4",
+          "marker_label": "CD4",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "CD44",
+          "marker_label": "CD44",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "CD45",
+          "marker_label": "CD45",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "CD45RA",
+          "marker_label": "CD45RA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "CD45RO",
+          "marker_label": "CD45RO",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "CD56",
+          "marker_label": "CD56",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "CD8",
+          "marker_label": "CD8",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "DAPI2",
+          "marker_label": "DAPI2",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "FoxP3",
+          "marker_label": "FoxP3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "GranzymeB",
+          "marker_label": "GranzymeB",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "HLA-DR",
+          "marker_label": "HLA-DR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "Ki67",
+          "marker_label": "Ki67",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 30,
+          "source_name": "PGP9.5",
+          "marker_label": "PGP9.5",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 31,
+          "source_name": "PanCK",
+          "marker_label": "PanCK",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 32,
+          "source_name": "Podoplanin",
+          "marker_label": "Podoplanin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 33,
+          "source_name": "RORgammaT",
+          "marker_label": "RORgammaT",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 34,
+          "source_name": "SPP1",
+          "marker_label": "SPP1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 35,
+          "source_name": "Siglec8",
+          "marker_label": "Siglec8",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 36,
+          "source_name": "Vimentin",
+          "marker_label": "Vimentin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        }
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Monkman2024_CODEX_NSCLC/spora_inventory/codex_ordered_marker_names.json"
+    },
+    {
+      "sample_id": "Phillips2021_codex",
+      "study": "Phillips2021_CODEX_CutaneousTCellLymphoma",
+      "technology": "CODEX",
+      "source": {
+        "kind": "zarr",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Phillips2021_CODEX_CutaneousTCellLymphoma/spora/codex/0_37744mpp/images/phillips2021immune_ahmduilj_0000.ome.zarr/0",
+        "indices": [
+          0,
+          39,
+          8,
+          6
+        ],
+        "source_shape": [
+          56,
+          1440,
+          1920
+        ],
+        "roi": [
+          192,
+          0,
+          1536,
+          1440
+        ],
+        "mpp": 0.37744,
+        "mpp_evidence": {
+          "status": "published_source_resolution_contract",
+          "unit": "um/px",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/cache/collection_20261018/spora_inventory/phillips2021immune/native_evidence.json"
+          ],
+          "basis": "Source inventory binds spora-submissions/phillips2021immune/codex/0_37744mpp/images/ to highest_published_mpp=0.37744; actual native shape checked. Embedded NGFF [1,1] is inconsistent and not used. No independent microscope-calibration audit."
+        },
+        "source_phase": "published_spora_intensities_at_original_resolution; upstream_processing_not_repeated",
+        "panel_id": "Phillips2021_CODEX_CutaneousTCellLymphoma:56_channel_source_panel",
+        "channel_names": [
+          "Hoechst",
+          "CD45",
+          "Cytokeratin",
+          "Vimentin"
+        ],
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "Hoechst",
+        "CD45",
+        "Cytokeratin",
+        "Vimentin"
+      ],
+      "mpp": 0.37744,
+      "roi": [
+        192,
+        0,
+        1536,
+        1440
+      ],
+      "source_shape": [
+        56,
+        1440,
+        1920
+      ],
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "Hoechst",
+          "marker_label": "Hoechst",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "CD164",
+          "marker_label": "CD164",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "FOXP3",
+          "marker_label": "FOXP3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "GATA3",
+          "marker_label": "GATA3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "MUC-1",
+          "marker_label": "MUC-1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "p53",
+          "marker_label": "p53",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 6,
+          "source_name": "Vimentin",
+          "marker_label": "Vimentin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "T-bet",
+          "marker_label": "T-bet",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "Cytokeratin",
+          "marker_label": "Cytokeratin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 9,
+          "source_name": "PD-L1",
+          "marker_label": "PD-L1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "Ki-67",
+          "marker_label": "Ki-67",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "CD15",
+          "marker_label": "CD15",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "CD30",
+          "marker_label": "CD30",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "CD2",
+          "marker_label": "CD2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "GranzymeB",
+          "marker_label": "GranzymeB",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "CD5",
+          "marker_label": "CD5",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "MMP-9",
+          "marker_label": "MMP-9",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "CD4",
+          "marker_label": "CD4",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "LAG-3",
+          "marker_label": "LAG-3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "CD25",
+          "marker_label": "CD25",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "CD56",
+          "marker_label": "CD56",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "CD20",
+          "marker_label": "CD20",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "PD-1",
+          "marker_label": "PD-1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "CD11c",
+          "marker_label": "CD11c",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "CD162",
+          "marker_label": "CD162",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "CD16",
+          "marker_label": "CD16",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "CD11b",
+          "marker_label": "CD11b",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "CD194",
+          "marker_label": "CD194",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "IDO-1",
+          "marker_label": "IDO-1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "EGFR",
+          "marker_label": "EGFR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 30,
+          "source_name": "VISTA",
+          "marker_label": "VISTA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 31,
+          "source_name": "HLA-DR",
+          "marker_label": "HLA-DR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 32,
+          "source_name": "ICOS",
+          "marker_label": "ICOS",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 33,
+          "source_name": "BCL-2",
+          "marker_label": "BCL-2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 34,
+          "source_name": "CD3",
+          "marker_label": "CD3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 35,
+          "source_name": "CD69",
+          "marker_label": "CD69",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 36,
+          "source_name": "CD8",
+          "marker_label": "CD8",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 37,
+          "source_name": "CD7",
+          "marker_label": "CD7",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 38,
+          "source_name": "CD45RA",
+          "marker_label": "CD45RA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 39,
+          "source_name": "CD45",
+          "marker_label": "CD45",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 40,
+          "source_name": "CD1a",
+          "marker_label": "CD1a",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 41,
+          "source_name": "CD57",
+          "marker_label": "CD57",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 42,
+          "source_name": "B-catenin",
+          "marker_label": "B-catenin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 43,
+          "source_name": "CD45RO",
+          "marker_label": "CD45RO",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 44,
+          "source_name": "CD71",
+          "marker_label": "CD71",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 45,
+          "source_name": "CD34",
+          "marker_label": "CD34",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 46,
+          "source_name": "CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 47,
+          "source_name": "CD38",
+          "marker_label": "CD38",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 48,
+          "source_name": "Collagen-IV",
+          "marker_label": "Collagen-IV",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 49,
+          "source_name": "CD31",
+          "marker_label": "CD31",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 50,
+          "source_name": "Podoplanin",
+          "marker_label": "Podoplanin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 51,
+          "source_name": "CD138",
+          "marker_label": "CD138",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 52,
+          "source_name": "CD163",
+          "marker_label": "CD163",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 53,
+          "source_name": "Mast-cell-tryptase",
+          "marker_label": "Mast-cell-tryptase",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 54,
+          "source_name": "MMP-12",
+          "marker_label": "MMP-12",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 55,
+          "source_name": "DRAQ5",
+          "marker_label": "DRAQ5",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        }
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Phillips2021_CODEX_CutaneousTCellLymphoma/spora_inventory/codex_ordered_marker_names.json"
+    },
+    {
+      "sample_id": "Risom2022_mibi",
+      "study": "Risom2022_MIBI_BreastCancer",
+      "technology": "MIBI",
+      "source": {
+        "kind": "tiff_stack",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Risom2022_MIBI_BreastCancer/htan_duke_release_2_4/Point2203_31606.ome.tif",
+        "indices": [
+          28,
+          21,
+          12,
+          13
+        ],
+        "source_shape": [
+          45,
+          1024,
+          1024
+        ],
+        "roi": [
+          0,
+          0,
+          1024,
+          1024
+        ],
+        "mpp": 0.488,
+        "mpp_evidence": {
+          "status": "OME_physical_size",
+          "basis": "Per-file OME PhysicalSizeX/Y=0.488; unit omitted, OME default micrometers.",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Risom2022_MIBI_BreastCancer/htan_duke_release_2_4/Point2203_31606.ome.tif"
+          ],
+          "per_file_PhysicalSizeX": "0.488",
+          "per_file_PhysicalSizeY": "0.488"
+        },
+        "source_phase": "published_source_processed_intensities; processing_details_not_fully_resolved",
+        "panel_id": "Risom2022_MIBI_BreastCancer:published_marker_panel",
+        "channel_names": [
+          "HH3",
+          "ECAD",
+          "CD44",
+          "CD45"
+        ],
+        "selected_ifd_indices_verified": true,
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "HH3",
+        "ECAD",
+        "CD44",
+        "CD45"
+      ],
+      "mpp": 0.488,
+      "roi": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "source_shape": [
+        45,
+        1024,
+        1024
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Risom2022_MIBI_BreastCancer/ordered_markers.json",
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "AR",
+          "marker_label": "AR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "Au",
+          "marker_label": "Au",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "Background",
+          "marker_label": "Background",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "C",
+          "marker_label": "C",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "CD3",
+          "marker_label": "CD3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "CD4",
+          "marker_label": "CD4",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 6,
+          "source_name": "CD8",
+          "marker_label": "CD8",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "CD11c",
+          "marker_label": "CD11c",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "CD14",
+          "marker_label": "CD14",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "CD20",
+          "marker_label": "CD20",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "CD31",
+          "marker_label": "CD31",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "CD36",
+          "marker_label": "CD36",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "CD44",
+          "marker_label": "CD44",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "CD45",
+          "marker_label": "CD45",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "CD56",
+          "marker_label": "CD56",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "CK5",
+          "marker_label": "CK5",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "CK7",
+          "marker_label": "CK7",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "COLI",
+          "marker_label": "COLI",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "COX2",
+          "marker_label": "COX2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "Ca40",
+          "marker_label": "Ca40",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "ECAD",
+          "marker_label": "ECAD",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "ER",
+          "marker_label": "ER",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "FAP",
+          "marker_label": "FAP",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "FOXP3",
+          "marker_label": "FOXP3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "GLUT1",
+          "marker_label": "GLUT1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "GZMB",
+          "marker_label": "GZMB",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "HER2",
+          "marker_label": "HER2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "HH3",
+          "marker_label": "HH3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "HIF1a",
+          "marker_label": "HIF1a",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 30,
+          "source_name": "HLADRDPDQ",
+          "marker_label": "HLADRDPDQ",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 31,
+          "source_name": "IDO1",
+          "marker_label": "IDO1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 32,
+          "source_name": "Ki67",
+          "marker_label": "Ki67",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 33,
+          "source_name": "MMP9",
+          "marker_label": "MMP9",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 34,
+          "source_name": "MPO",
+          "marker_label": "MPO",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 35,
+          "source_name": "Nuc",
+          "marker_label": "Nuc",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 36,
+          "source_name": "P63",
+          "marker_label": "P63",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 37,
+          "source_name": "P",
+          "marker_label": "P",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 38,
+          "source_name": "PD1",
+          "marker_label": "PD1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 39,
+          "source_name": "PDL1",
+          "marker_label": "PDL1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 40,
+          "source_name": "PanKRT",
+          "marker_label": "PanKRT",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 41,
+          "source_name": "SMA",
+          "marker_label": "SMA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 42,
+          "source_name": "Tryptase",
+          "marker_label": "Tryptase",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 43,
+          "source_name": "VIM",
+          "marker_label": "VIM",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 44,
+          "source_name": "pS6",
+          "marker_label": "pS6",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        }
+      ]
+    },
+    {
+      "sample_id": "Azulay2025_mibi",
+      "study": "Azulay2025_MIBI_GVHD",
+      "technology": "MIBI",
+      "source": {
+        "kind": "tiff_planes",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4",
+        "paths": [
+          "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/dsDNA.tif",
+          "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/NAKATPASE.tif",
+          "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/ECAD.tif",
+          "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD45.tif"
+        ],
+        "indices": [
+          38,
+          31,
+          20,
+          10
+        ],
+        "index_semantics": "0-based published marker table order; paths explicitly assemble selected planes; every physical file uses IFD 0",
+        "per_file_shape_yx": [
+          [
+            1024,
+            1024
+          ],
+          [
+            1024,
+            1024
+          ],
+          [
+            1024,
+            1024
+          ],
+          [
+            1024,
+            1024
+          ]
+        ],
+        "source_shape": [
+          40,
+          1024,
+          1024
+        ],
+        "roi": [
+          0,
+          0,
+          1024,
+          1024
+        ],
+        "mpp": 0.390625,
+        "mpp_evidence": {
+          "status": "exact_source_FOV_size_divided_by_verified_pixels",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/fovs_metadata.csv"
+          ],
+          "basis": "Use original Mendeley FOVs, not unverified Depot rescaling. Exact FOV rows Size [um]=400; selected original TIFF YX=1024x1024; 400/1024=0.390625 um/px."
+        },
+        "source_phase": "published_source_processed_intensities; processing_details_not_fully_resolved",
+        "panel_id": "Azulay2025_MIBI_GVHD:published_marker_panel",
+        "channel_names": [
+          "dsDNA",
+          "NAKATPASE",
+          "ECAD",
+          "CD45"
+        ],
+        "source_shape_semantics": "Virtual CYX view using published marker-table order; exact physical file YX shapes in per_file_shape_yx. indices address that explicit order; selected files read IFD 0.",
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "dsDNA",
+        "NAKATPASE",
+        "ECAD",
+        "CD45"
+      ],
+      "mpp": 0.390625,
+      "roi": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "source_shape": [
+        40,
+        1024,
+        1024
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Azulay2025_MIBI_GVHD/MarkerTable.csv",
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "CD103",
+          "marker_label": "CD103",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD103.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "CD14",
+          "marker_label": "CD14",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD14.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "CD15",
+          "marker_label": "CD15",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD15.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "CD163",
+          "marker_label": "CD163",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD163.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "CD20",
+          "marker_label": "CD20",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD20.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "CD206",
+          "marker_label": "CD206",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD206.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 6,
+          "source_name": "CD3",
+          "marker_label": "CD3",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD3.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "CD31",
+          "marker_label": "CD31",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD31.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "CD38",
+          "marker_label": "CD38",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD38.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "CD4",
+          "marker_label": "CD4",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD4.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "CD45",
+          "marker_label": "CD45",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD45.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "CD45RA",
+          "marker_label": "CD45RA",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD45RA.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "CD45RO",
+          "marker_label": "CD45RO",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD45RO.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "CD56",
+          "marker_label": "CD56",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD56.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD68.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "CD69",
+          "marker_label": "CD69",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD69.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "CD8",
+          "marker_label": "CD8",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD8.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "Collagen",
+          "marker_label": "Collagen",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/Collagen.tif",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 18,
+          "source_name": "CHGA",
+          "marker_label": "CHGA",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CHGA.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "CD209",
+          "marker_label": "CD209",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/CD209.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "ECAD",
+          "marker_label": "ECAD",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/ECAD.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "FOXP3",
+          "marker_label": "FOXP3",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/FOXP3.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "GZMB",
+          "marker_label": "GZMB",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/GZMB.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "HLADRDPDQ",
+          "marker_label": "HLADRDPDQ",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/HLADRDPDQ.tif",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 24,
+          "source_name": "HLA1",
+          "marker_label": "HLA1",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/HLA1.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "IDO1",
+          "marker_label": "IDO1",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/IDO1.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "IgA",
+          "marker_label": "IgA",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/IgA.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "Ki67",
+          "marker_label": "Ki67",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/Ki67.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "Lysozyme",
+          "marker_label": "Lysozyme",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/Lysozyme.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "Tryptase",
+          "marker_label": "Tryptase",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/Tryptase.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 30,
+          "source_name": "Mucin",
+          "marker_label": "Mucin",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/Mucin.tif",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 31,
+          "source_name": "NAKATPASE",
+          "marker_label": "NAKATPASE",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/NAKATPASE.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 32,
+          "source_name": "PD1",
+          "marker_label": "PD1",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/PD1.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 33,
+          "source_name": "Calprotectin",
+          "marker_label": "Calprotectin",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/Calprotectin.tif",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 34,
+          "source_name": "SMA",
+          "marker_label": "SMA",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/SMA.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 35,
+          "source_name": "TCF",
+          "marker_label": "TCF",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/TCF.tif",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 36,
+          "source_name": "VIM",
+          "marker_label": "VIM",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/VIM.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 37,
+          "source_name": "PDL1",
+          "marker_label": "PDL1",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/PDL1.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 38,
+          "source_name": "dsDNA",
+          "marker_label": "dsDNA",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/dsDNA.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 39,
+          "source_name": "Keratin",
+          "marker_label": "Keratin",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Azulay2025_MIBI_GVHD/mendeley_v2/FOVs/Control_01_FOV_4/Keratin.tif",
+          "restored_protein_measurement": true
+        }
+      ]
+    },
+    {
+      "sample_id": "Liu2023_mibi",
+      "study": "Liu2023_MIBI_LymphNode",
+      "technology": "MIBI",
+      "source": {
+        "kind": "tiff_planes",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1",
+        "paths": [
+          "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/HH3.tif",
+          "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD45.tif",
+          "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD3.tif",
+          "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD20.tif"
+        ],
+        "indices": [
+          28,
+          16,
+          13,
+          9
+        ],
+        "index_semantics": "0-based published marker table order; paths explicitly assemble selected planes; every physical file uses IFD 0",
+        "per_file_shape_yx": [
+          [
+            1024,
+            1024
+          ],
+          [
+            1024,
+            1024
+          ],
+          [
+            1024,
+            1024
+          ],
+          [
+            1024,
+            1024
+          ]
+        ],
+        "source_shape": [
+          45,
+          1024,
+          1024
+        ],
+        "roi": [
+          0,
+          0,
+          1024,
+          1024
+        ],
+        "mpp": 0.48828125,
+        "mpp_evidence": {
+          "status": "primary_release_FOV_size_divided_by_verified_pixels",
+          "url": "https://zenodo.org/records/8096953",
+          "basis": "Primary Zenodo description: images are 1024x1024 pixels, 500 um. 500/1024=0.48828125 um/px; 72dpi is not used."
+        },
+        "source_phase": "published_source_processed_intensities; processing_details_not_fully_resolved",
+        "panel_id": "Liu2023_MIBI_LymphNode:published_marker_panel",
+        "channel_names": [
+          "HH3",
+          "CD45",
+          "CD3",
+          "CD20"
+        ],
+        "source_shape_semantics": "Virtual CYX view using published marker-table order; exact physical file YX shapes in per_file_shape_yx. indices address that explicit order; selected files read IFD 0.",
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "HH3",
+        "CD45",
+        "CD3",
+        "CD20"
+      ],
+      "mpp": 0.48828125,
+      "roi": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "source_shape": [
+        45,
+        1024,
+        1024
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Liu2023_MIBI_LymphNode/channel_mapping.csv",
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "Au",
+          "marker_label": "Au",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Au.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "Background",
+          "marker_label": "Background",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Background.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "C",
+          "marker_label": "C",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/C.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "CC3",
+          "marker_label": "CC3",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CC3.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "CD11c",
+          "marker_label": "CD11c",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD11c.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "CD138",
+          "marker_label": "CD138",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD138.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 6,
+          "source_name": "CD14",
+          "marker_label": "CD14",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD14.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "CD16",
+          "marker_label": "CD16",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD16.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "CD163",
+          "marker_label": "CD163",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD163.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "CD20",
+          "marker_label": "CD20",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD20.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "CD206",
+          "marker_label": "CD206",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD206.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "CD209",
+          "marker_label": "CD209",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD209.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "CD21",
+          "marker_label": "CD21",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD21.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "CD3",
+          "marker_label": "CD3",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD3.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "CD31",
+          "marker_label": "CD31",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD31.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "CD4",
+          "marker_label": "CD4",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD4.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "CD45",
+          "marker_label": "CD45",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD45.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "CD45RO",
+          "marker_label": "CD45RO",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD45RO.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "CD57",
+          "marker_label": "CD57",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD57.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD68.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "CD8",
+          "marker_label": "CD8",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/CD8.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "Ca",
+          "marker_label": "Ca",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Ca.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "Fe",
+          "marker_label": "Fe",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Fe.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "Foxp3",
+          "marker_label": "Foxp3",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Foxp3.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "GLUT1",
+          "marker_label": "GLUT1",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/GLUT1.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "GranzymeB",
+          "marker_label": "GranzymeB",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/GranzymeB.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "H3K27me3",
+          "marker_label": "H3K27me3",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/H3K27me3.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "H3K9Ac",
+          "marker_label": "H3K9Ac",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/H3K9Ac.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "HH3",
+          "marker_label": "HH3",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/HH3.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "HLA-DR-DQ-DP",
+          "marker_label": "HLA-DR-DQ-DP",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/HLA-DR-DQ-DP.tif",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 30,
+          "source_name": "IDO",
+          "marker_label": "IDO",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/IDO.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 31,
+          "source_name": "Ki67",
+          "marker_label": "Ki67",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Ki67.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 32,
+          "source_name": "Lag3",
+          "marker_label": "Lag3",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Lag3.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 33,
+          "source_name": "MPO",
+          "marker_label": "MPO",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/MPO.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 34,
+          "source_name": "Na",
+          "marker_label": "Na",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Na.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 35,
+          "source_name": "PD-L1",
+          "marker_label": "PD-L1",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/PD-L1.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 36,
+          "source_name": "PD1",
+          "marker_label": "PD1",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/PD1.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 37,
+          "source_name": "SMA",
+          "marker_label": "SMA",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/SMA.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 38,
+          "source_name": "Si",
+          "marker_label": "Si",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Si.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 39,
+          "source_name": "TIM3",
+          "marker_label": "TIM3",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/TIM3.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 40,
+          "source_name": "Ta",
+          "marker_label": "Ta",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Ta.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 41,
+          "source_name": "Tbet",
+          "marker_label": "Tbet",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Tbet.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 42,
+          "source_name": "Tryptase",
+          "marker_label": "Tryptase",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Tryptase.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 43,
+          "source_name": "Vimentin",
+          "marker_label": "Vimentin",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/Vimentin.tif",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 44,
+          "source_name": "pS6",
+          "marker_label": "pS6",
+          "include": true,
+          "exclusion_reason": "",
+          "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Liu2023_MIBI_LymphNode/zenodo_8096953/mibi_single_channel_tifs/Point1/pS6.tif",
+          "restored_protein_measurement": false
+        }
+      ]
+    },
+    {
+      "sample_id": "Ly2025_comet",
+      "study": "Ly2025_COMET_AML",
+      "technology": "IF",
+      "source": {
+        "kind": "tiff_stack",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Ly2025_COMET_AML/figshare_28861841_v3/TMA8_5A.tiff",
+        "indices": [
+          0,
+          22,
+          21,
+          4
+        ],
+        "channel_order_evidence": [
+          "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Ly2025_COMET_AML/source_manifest.json",
+          "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Ly2025_COMET_AML/source_ordered_channel_map.json"
+        ],
+        "source_shape": [
+          31,
+          4839,
+          7950
+        ],
+        "roi": [
+          3207,
+          1651,
+          1536,
+          1536
+        ],
+        "mpp": 0.23,
+        "mpp_evidence": {
+          "status": "embedded_physical_calibration",
+          "basis": "所选文件 OME Pixels PhysicalSizeX=0.23、PhysicalSizeY=0.23；OME 未显式写 unit，采用 OME 长度单位默认 µm；TIFF ResolutionUnit=centimeter，X/YResolution=5565231/128 px/cm，换算约 0.23000033 µm/px，一致。",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Ly2025_COMET_AML/figshare_28861841_v3/TMA8_5A.tiff"
+          ],
+          "per_file_PhysicalSizeX": "0.23",
+          "per_file_PhysicalSizeY": "0.23"
+        },
+        "source_phase": "published_registered_COMET_uint8_export",
+        "panel_id": "Ly2025_COMET_AML:31_channel_source_panel",
+        "channel_names": [
+          "DAPI",
+          "CD45Rb",
+          "CD33Ms",
+          "CD68ms"
+        ],
+        "selected_ifd_indices_verified": true,
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "DAPI",
+        "CD45Rb",
+        "CD33Ms",
+        "CD68ms"
+      ],
+      "mpp": 0.23,
+      "roi": [
+        3207,
+        1651,
+        1536,
+        1536
+      ],
+      "source_shape": [
+        31,
+        4839,
+        7950
+      ],
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "DAPI",
+          "marker_label": "DAPI",
+          "include": false,
+          "exclusion_reason": "dna_nuclear_excluded",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "Cy5",
+          "marker_label": "Cy5",
+          "include": false,
+          "exclusion_reason": "unlabelled_fluorophore_channel_excluded",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "TRITC",
+          "marker_label": "TRITC",
+          "include": false,
+          "exclusion_reason": "unlabelled_fluorophore_channel_excluded",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "CD34rb",
+          "marker_label": "CD34",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "CD68ms",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "CX3CR1Rb",
+          "marker_label": "CX3CR1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 6,
+          "source_name": "GRZKMs",
+          "marker_label": "GRZK",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "BCL11ARb",
+          "marker_label": "BCL11a",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "CD3Ms",
+          "marker_label": "CD3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "HLADRPQMs",
+          "marker_label": "HLADRPQ",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 10,
+          "source_name": "CD11CRb",
+          "marker_label": "CD11c",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "IFITM3Rb",
+          "marker_label": "IFITM3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "CD74Ms",
+          "marker_label": "CD74",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "CD4Rb",
+          "marker_label": "CD4",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "CD20Ms",
+          "marker_label": "CD20",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "CD8aMs",
+          "marker_label": "CD8a",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "GRZBRb",
+          "marker_label": "GRZB",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "BST2Ms",
+          "marker_label": "BST2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "FOXP3Rb",
+          "marker_label": "FOXP3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "CD14Rb",
+          "marker_label": "CD14",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "HLAEMs",
+          "marker_label": "HLAE",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "CD33Ms",
+          "marker_label": "CD33",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "CD45Rb",
+          "marker_label": "CD45",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "CD34Rb",
+          "marker_label": "CD34Rb",
+          "include": false,
+          "exclusion_reason": "protein_marker_repeat_excluded",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "P53Ms",
+          "marker_label": "P53",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "KI67Rb",
+          "marker_label": "Ki67",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "NFKBMs",
+          "marker_label": "NF-kB",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "CD56Rb",
+          "marker_label": "CD56",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "VEGFR2Ms",
+          "marker_label": "VEGFR2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "CD163Ms",
+          "marker_label": "CD163",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 30,
+          "source_name": "FOXP3Rb",
+          "marker_label": "FOXP3Rb",
+          "include": false,
+          "exclusion_reason": "protein_marker_repeat_excluded",
+          "restored_protein_measurement": false
+        }
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Ly2025_COMET_AML/source_ordered_channel_map.json"
+    },
+    {
+      "sample_id": "Nirmal2022_cycif",
+      "study": "Nirmal2022_CyCIF_Melanoma",
+      "technology": "IF",
+      "source": {
+        "kind": "tiff_stack",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Nirmal2022_CyCIF_Melanoma/hta_melatlas_1/MEL02-1-1.ome.tif",
+        "indices": [
+          0,
+          37,
+          29,
+          9,
+          26
+        ],
+        "channel_order_evidence": [
+          "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Nirmal2022_CyCIF_Melanoma/MEL02-1-1.channels.json",
+          "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Nirmal2022_CyCIF_Melanoma/channel_order_proof.json"
+        ],
+        "source_shape": [
+          48,
+          13599,
+          11218
+        ],
+        "roi": [
+          3328,
+          3328,
+          1536,
+          1536
+        ],
+        "mpp": 0.6499999761581421,
+        "mpp_evidence": {
+          "status": "embedded_physical_calibration",
+          "basis": "所选文件 OME Pixels PhysicalSizeX/PhysicalSizeY，均显式 PhysicalSize*Unit=µm。",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Nirmal2022_CyCIF_Melanoma/hta_melatlas_1/MEL02-1-1.ome.tif"
+          ],
+          "per_file_PhysicalSizeX": "0.6499999761581421",
+          "per_file_PhysicalSizeY": "0.6499999761581421"
+        },
+        "source_phase": "published_Ashlar_registered_CyCIF_export",
+        "panel_id": "Nirmal2022_CyCIF_Melanoma:48_channel_source_panel",
+        "channel_names": [
+          "DNA_1",
+          "NCAD",
+          "S100a",
+          "CD45RO",
+          "CD68"
+        ],
+        "selected_ifd_indices_verified": true,
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "DNA_1",
+        "NCAD",
+        "S100a",
+        "CD45RO",
+        "CD68"
+      ],
+      "mpp": 0.6499999761581421,
+      "roi": [
+        3328,
+        3328,
+        1536,
+        1536
+      ],
+      "source_shape": [
+        48,
+        13599,
+        11218
+      ],
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "DNA_1",
+          "marker_label": "DNA_1",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "bg2a",
+          "marker_label": "bg2a",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "bg3a",
+          "marker_label": "bg3a",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "bg4a",
+          "marker_label": "bg4a",
+          "include": false,
+          "exclusion_reason": "non-protein acquisition/control/background/RNA channel",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "DNA_2",
+          "marker_label": "DNA_2",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "pERK",
+          "marker_label": "pERK",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 6,
+          "source_name": "CD207",
+          "marker_label": "CD207",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "SOX10",
+          "marker_label": "SOX10",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "DNA_3",
+          "marker_label": "DNA_3",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "CD45RO",
+          "marker_label": "CD45RO",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "SOX2",
+          "marker_label": "SOX2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "CD25",
+          "marker_label": "CD25",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "DNA_4",
+          "marker_label": "DNA_4",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "CD4",
+          "marker_label": "CD4",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "pan-CK",
+          "marker_label": "pan-CK",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 15,
+          "source_name": "CD8a",
+          "marker_label": "CD8a",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "DNA_5",
+          "marker_label": "DNA_5",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "CD163",
+          "marker_label": "CD163",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "FOXP3",
+          "marker_label": "FOXP3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "CD3d",
+          "marker_label": "CD3d",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "DNA_6",
+          "marker_label": "DNA_6",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "pS6",
+          "marker_label": "pS6",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "CD11c",
+          "marker_label": "CD11c",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "PDL1",
+          "marker_label": "PDL1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "DNA_7",
+          "marker_label": "DNA_7",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "MCAM",
+          "marker_label": "MCAM",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "PD1",
+          "marker_label": "PD1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "DNA_8",
+          "marker_label": "DNA_8",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "S100a",
+          "marker_label": "S100a",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": true
+        },
+        {
+          "source_index": 30,
+          "source_name": "ICOS",
+          "marker_label": "ICOS",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 31,
+          "source_name": "OX40",
+          "marker_label": "OX40",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 32,
+          "source_name": "DNA_9",
+          "marker_label": "DNA_9",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 33,
+          "source_name": "CD40L",
+          "marker_label": "CD40L",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 34,
+          "source_name": "HLADR",
+          "marker_label": "HLADR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 35,
+          "source_name": "HLAA",
+          "marker_label": "HLAA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 36,
+          "source_name": "DNA_10",
+          "marker_label": "DNA_10",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 37,
+          "source_name": "NCAD",
+          "marker_label": "NCAD",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 38,
+          "source_name": "LAG3",
+          "marker_label": "LAG3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 39,
+          "source_name": "CD31",
+          "marker_label": "CD31",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 40,
+          "source_name": "DNA_11",
+          "marker_label": "DNA_11",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 41,
+          "source_name": "CD73",
+          "marker_label": "CD73",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 42,
+          "source_name": "CD90",
+          "marker_label": "CD90",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 43,
+          "source_name": "TIM3",
+          "marker_label": "TIM3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 44,
+          "source_name": "DNA_12",
+          "marker_label": "DNA_12",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 45,
+          "source_name": "C-Kit",
+          "marker_label": "C-Kit",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 46,
+          "source_name": "CD40",
+          "marker_label": "CD40",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 47,
+          "source_name": "Granz.B",
+          "marker_label": "Granz.B",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        }
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Nirmal2022_CyCIF_Melanoma/MEL02-1-1.channels.json"
+    },
+    {
+      "sample_id": "Radtke2024_ibex",
+      "study": "Radtke2024_CellDive_FL",
+      "technology": "IF",
+      "source": {
+        "kind": "ims",
+        "path": "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Radtke2024_CellDive_FL/idr0158/FL1/IBEX_FL1.ims",
+        "indices": [
+          4,
+          5,
+          23,
+          45
+        ],
+        "z_index": 1,
+        "source_storage_shape": [
+          48,
+          4,
+          7680,
+          22528
+        ],
+        "valid_shape": [
+          48,
+          4,
+          7447,
+          22221
+        ],
+        "source_shape": [
+          48,
+          4,
+          7447,
+          22221
+        ],
+        "roi": [
+          9728,
+          2560,
+          1536,
+          1536
+        ],
+        "mpp": 0.284,
+        "mpp_evidence": {
+          "status": "embedded_physical_calibration",
+          "basis": "IMS /DataSetInfo/Pixels 属性 PhysicalSizeX/Y/Z=0.284，单位均显式 µm。Image 的 ExtMax0/SizeX、ExtMax1/SizeY 也与 0.284 一致。",
+          "paths": [
+            "/mnt/NAS_21T/ProjectData/CellWeft/raw/public/Radtke2024_CellDive_FL/idr0158/FL1/IBEX_FL1.ims"
+          ]
+        },
+        "source_phase": "published_registered_IBEX_volume; some_background_thresholding_source_documented; fixed_Z1",
+        "panel_id": "Radtke2024_CellDive_FL:48_channel_source_panel",
+        "channel_names": [
+          "Hoechst:Cycle1_Nuclei",
+          "AF488:Cycle1_CD20",
+          "AF594:Cycle4_CD3",
+          "PE_iF594:Cycle9_CD45"
+        ],
+        "notes": "Fixed native source and ROI; source_phase and panel match target. Metadata checks do not establish segmentation quality."
+      },
+      "channel_names": [
+        "Hoechst:Cycle1_Nuclei",
+        "AF488:Cycle1_CD20",
+        "AF594:Cycle4_CD3",
+        "PE_iF594:Cycle9_CD45"
+      ],
+      "mpp": 0.284,
+      "roi": [
+        9728,
+        2560,
+        1536,
+        1536
+      ],
+      "source_shape": [
+        48,
+        4,
+        7447,
+        22221
+      ],
+      "quantification_channels": [
+        {
+          "source_index": 0,
+          "source_name": "AF532:Cycle1_SPARC",
+          "marker_label": "SPARC",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 1,
+          "source_name": "AF647:Cycle1_BCL2",
+          "marker_label": "BCL2",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 2,
+          "source_name": "PE:Cycle1_CD10",
+          "marker_label": "CD10",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 3,
+          "source_name": "AF700:Cycle1_CollagenIV",
+          "marker_label": "CollagenIV",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 4,
+          "source_name": "Hoechst:Cycle1_Nuclei",
+          "marker_label": "Nuclei",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 5,
+          "source_name": "AF488:Cycle1_CD20",
+          "marker_label": "CD20",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 6,
+          "source_name": "AF532:Cycle2_CD21",
+          "marker_label": "CD21",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 7,
+          "source_name": "AF647:Cycle2_BCL6",
+          "marker_label": "BCL6",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 8,
+          "source_name": "AF700:Cycle2_CD31",
+          "marker_label": "CD31",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 9,
+          "source_name": "Hoechst:Cycle2_Nuclei",
+          "marker_label": "Nuclei",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 10,
+          "source_name": "AF488:Cycle2_IgD",
+          "marker_label": "IgD",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 11,
+          "source_name": "PE:Cycle2_CD138",
+          "marker_label": "CD138",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 12,
+          "source_name": "AF532:Cycle3_CD23",
+          "marker_label": "CD23",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 13,
+          "source_name": "AF647:Cycle3_CD163",
+          "marker_label": "CD163",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 14,
+          "source_name": "AF700:Cycle3_CD11c",
+          "marker_label": "CD11c",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 15,
+          "source_name": "Hoechst:Cycle3_Nuclei",
+          "marker_label": "Nuclei",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 16,
+          "source_name": "AF488:Cycle3_HLADR",
+          "marker_label": "HLADR",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 17,
+          "source_name": "PE:Cycle3_CD1c",
+          "marker_label": "CD1c",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 18,
+          "source_name": "AF532:Cycle4_CD4",
+          "marker_label": "CD4",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 19,
+          "source_name": "AF647:Cycle4_CD25",
+          "marker_label": "CD25",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 20,
+          "source_name": "AF700:Cycle4_Ki67",
+          "marker_label": "Ki67",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 21,
+          "source_name": "Hoechst:Cycle4_Nuclei",
+          "marker_label": "Nuclei",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 22,
+          "source_name": "AF488:Cycle4_CD8",
+          "marker_label": "CD8",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 23,
+          "source_name": "AF594:Cycle4_CD3",
+          "marker_label": "CD3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 24,
+          "source_name": "eF570:Cycle4_FOXP3",
+          "marker_label": "FOXP3",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 25,
+          "source_name": "AF532:Cycle5_CXCL13",
+          "marker_label": "CXCL13",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 26,
+          "source_name": "AF647:Cycle5_CD69",
+          "marker_label": "CD69",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 27,
+          "source_name": "PE:Cycle5_PD1",
+          "marker_label": "PD1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 28,
+          "source_name": "Hoechst:Cycle5_Nuclei",
+          "marker_label": "Nuclei",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 29,
+          "source_name": "AF488:Cycle5_ICOS",
+          "marker_label": "ICOS",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 30,
+          "source_name": "AF647:Cycle6_CD68",
+          "marker_label": "CD68",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 31,
+          "source_name": "PE:Cycle6_CD35",
+          "marker_label": "CD35",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 32,
+          "source_name": "Hoechst:Cycle6_Nuclei",
+          "marker_label": "Nuclei",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 33,
+          "source_name": "FITC:Cycle6_CD39",
+          "marker_label": "CD39",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 34,
+          "source_name": "AF532:Cycle6_LYVE1",
+          "marker_label": "LYVE1",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 35,
+          "source_name": "AF532:Cycle7_Lumican",
+          "marker_label": "Lumican",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 36,
+          "source_name": "AF647:Cycle7_DCSIGN",
+          "marker_label": "DCSIGN",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 37,
+          "source_name": "Hoechst:Cycle7_Nuclei",
+          "marker_label": "Nuclei",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 38,
+          "source_name": "AF488:Cycle7_aSMA",
+          "marker_label": "aSMA",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 39,
+          "source_name": "PE:Cycle7_IRF4",
+          "marker_label": "IRF4",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 40,
+          "source_name": "AF647:Cycle8_CD49a",
+          "marker_label": "CD49a",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 41,
+          "source_name": "Hoechst:Cycle8_Nuclei",
+          "marker_label": "Nuclei",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 42,
+          "source_name": "AF488:Cycle8_Desmin",
+          "marker_label": "Desmin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 43,
+          "source_name": "AF532:Cycle9_Vimentin",
+          "marker_label": "Vimentin",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 44,
+          "source_name": "AF647:Cycle9_CD44",
+          "marker_label": "CD44",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 45,
+          "source_name": "PE_iF594:Cycle9_CD45",
+          "marker_label": "CD45",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 46,
+          "source_name": "Hoechst:Cycle9_Nuclei",
+          "marker_label": "Nuclei",
+          "include": false,
+          "exclusion_reason": "DNA/nuclear stain",
+          "restored_protein_measurement": false
+        },
+        {
+          "source_index": 47,
+          "source_name": "AF488:Cycle9_CD94",
+          "marker_label": "CD94",
+          "include": true,
+          "exclusion_reason": "",
+          "restored_protein_measurement": false
+        }
+      ],
+      "channel_order_evidence": "/mnt/NAS_21T/ProjectData/CellWeft/metadata/public/Radtke2024_CellDive_FL/idr0158_ibex_channels.json"
+    }
+  ],
+  "previous_quantification_root": "/mnt/NAS_21T/ProjectData/CellWeft/results/protein_quantification_pilot_20261020/run02",
+  "normalization_comparison": {
+    "all_pixels_p99": "clip(x / percentile(x,99),0,1); undefined when denominator=0 and image is nonzero",
+    "nonzero_pixels_p99": "clip(x / percentile(x[x>0],99),0,1); all-zero channel remains zero"
+  }
+}

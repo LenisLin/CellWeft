@@ -1,0 +1,2 @@
+# Install into .venv-hf; kept separate from the model/training environment.
+hf==2.2.0

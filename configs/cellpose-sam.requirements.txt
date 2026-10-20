@@ -1,0 +1,4 @@
+# CellWeft project-local Cellpose-SAM environment.
+# The venv may reuse the project's existing CUDA-enabled PyTorch installation.
+cellpose==4.2.1.1
+scikit-image==0.26.0

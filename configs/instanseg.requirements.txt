@@ -1,0 +1,11 @@
+# Reuse OSMOSIS_V2 through a project-local --system-site-packages venv.
+# Keep inherited torch and numpy fixed; do not install [full] or [io].
+instanseg-torch==0.1.2
+torch==2.7.1+cu126
+numpy==2.5.2
+# Newly installed dependencies, pinned to the verified deployment.
+fastremap==1.21.0
+scikit-image==0.26.0
+imageio==2.38.1
+lazy-loader==0.6
+tifffile==2026.10.15

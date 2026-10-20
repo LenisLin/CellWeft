@@ -1,0 +1,7 @@
+# Reuse cellvit_env through a project-local --system-site-packages venv.
+# CPU execution; inherited TensorFlow/Keras/NumPy stay fixed.
+stardist==0.9.2
+csbdeep==0.8.2
+tensorflow==2.12.0
+keras==2.12.0
+numpy==1.23.5
