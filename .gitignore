@@ -22,6 +22,7 @@ __pycache__/
 .mypy_cache/
 .ipynb_checkpoints/
 .cache/
+/cache/
 build/
 dist/
 *.egg-info/
