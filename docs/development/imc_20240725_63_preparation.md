@@ -1,6 +1,6 @@
 # Feng2026_IMC_BladderCancer 膀胱癌队列数据准备
 
-2026-11-24，用户确认数据所有者为 Feng，登记年份为 2026，癌种为膀胱癌。正式 study ID 为 `Feng2026_IMC_BladderCancer`，处理结果位于主 NAS `processed/Feng2026_IMC_BladderCancer/`。原始来源为 `/mnt/public/lyx/horizontalProject/IMC_20240725_63`，原目录名保留为来源别名。首批范围固定为来源索引中的 520 个 ROI。逐图私有清单保存在主 NAS `cache/IMC_20240725_63_intake/`。
+2026-11-24，用户确认数据所有者为 Feng，登记年份为 2026，癌种为膀胱癌。正式 study ID 为 `Feng2026_IMC_BladderCancer`，处理结果位于主 NAS `processed/Feng2026_IMC_BladderCancer/`。原始来源为 `/mnt/public/lyx/horizontalProject/IMC_20240725_63`，原目录名保留为来源别名。首批处理来源索引中的 520 个 ROI；同日按用户要求删除其中 5 个患者连接未确认 ROI 的处理目录和当前图像索引，正式保留 515 图，稳定图像 ID 不重新编号。来源及历史验收证据保留。
 
 ## 已核对的范围
 
@@ -17,7 +17,21 @@
 
 ## 实施与验收
 
-本批 520 个 ROI 全部完成。逐图重开正式记录后，确认来源实例数与细胞、表达、近邻三表行数一致，共 3,695,878 个细胞。另对 20 个代表 ROI 各取一个有效蛋白，从输入图重算 P99.5、归一化像素及每个实例的均值，并核对所选细胞的近邻距离和窗口相交。正式回执为主 NAS `processed/Feng2026_IMC_BladderCancer/processing_summary.json`。
+原始 520 个 ROI 全部完成技术处理，共 3,695,878 个细胞，20 个代表 ROI 通过数值复核。删除 5 图后，保留 515 图、3,659,156 个细胞，代表图中仍保留 19 图。独立 D01 已按当前 515 图重新绑定，逐图结构及输入版本重核，沿用范围内 6 个 MCD 和 2 个 TXT 的原始像素抽查。现行回执为主 NAS `processed/Feng2026_IMC_BladderCancer/processing_summary.json`。
+
+## 训练与内部验证
+
+| 用途 | 正式 split | 患者数 | ROI 数 |
+| --- | --- | ---: | ---: |
+| 训练 | `development_train` | 50 | 421 |
+| 内部验证与选参 | `development_validation` | 12 | 94 |
+| 合计 | | 62 | 515 |
+
+先对确认的患者键排序，再用 Python `random.Random(20261124).shuffle` 打乱，前 `round(62×0.2)=12` 位用于验证。全部切片、ROI 和窗口继承患者分组。正式成员保存在 study 的 `training_split.json`，并加入主实验训练目录；仅训练 split 参与拟合。31 个已映射且绑定固定向量的蛋白作为有效输入，2 个待映射蛋白维持缺口。训练组织筛选仍为 `pending`，待完成组织估计核验后开放窗口采样。
+
+删除及划分入口为 `feng2026_training_split.py --retire`；随后运行 `feng2026_review.py --publish`，再执行 `feng2026_training_split.py --publish` 和 `feng2026_summary.py`。历史 520 图证据用于来源追溯，当前消费者以正式 515 图索引及新 D01 为准。
+
+## 处理步骤
 
 1. **锁定来源范围。** 核对与既有私有 study 的重复采集，按本批选定范围在 `raw/private/Feng2026_IMC_BladderCancer/` 登记原始文件与来源表。记录索引外采集及处置理由。原始来源保留在原位置。
 2. **整理 study 输入。** 用原始 MCD 或核对通过的 TXT 读取独立 ROI。核对方向、像素尺度、非矩形实测区域与四侧补边。按 S1 对接有序 panel，记录表达、仅分割、排除、映射待定的通道和原始索引。生成 `images.parquet`、`panel_mapping.csv`、`sample_metadata.csv`、`field_mapping.csv`、`review_results.csv` 与逐图 `input.tiff`。患者键仅按来源证据填写。
