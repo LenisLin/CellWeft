@@ -22,6 +22,27 @@ class MaskSource:
     alignment_issue: str | None = None
     overview_judgment: bool | None = None
     overview_required: bool = False
+    format: str = "tiff"
+    npz_key: str | None = None
+    selection: tuple[int | None, ...] = ()
+    padding_ltrb: tuple[int, int, int, int] = (0, 0, 0, 0)
+    flip_x: bool = False
+    flip_y: bool = False
+    quarter_turns: int = 0
+
+
+@dataclass(frozen=True)
+class MaskRejection:
+    """Documented reason that a paired author mask cannot be used."""
+
+    reason: str
+    evidence: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.reason, str) or not self.reason.strip():
+            raise ValueError("Unusable mask requires a nonempty reason")
+        if not isinstance(self.evidence, str) or not self.evidence.strip():
+            raise ValueError("Unusable mask requires traceable source evidence")
 
 
 @dataclass(frozen=True)
@@ -49,6 +70,10 @@ class SourceSpec:
     source_revision: str | None = None
     intensity_description: str = "published intensities"
     normalized_q995: tuple[float | None, ...] | None = None
+    valid_bounds: Window | None = None
+    mask_status: str = "absent"
+    sample_region: Path | None = None
+    mask_rejection: MaskRejection | None = None
 
 
 @dataclass(frozen=True)
@@ -94,6 +119,15 @@ class PreparationSettings:
     compression: str = "deflate"
     cpu_workers: int = 1
     weights: Path | None = None
+    precision: str = "bf16"
+    sampling_reviewed: bool = False
+    # An unknown author-mask binding normally keeps segmentation pending.  A
+    # scoped runtime may explicitly permit cpsam_v2 while preserving the
+    # unknown provenance in metadata; this never treats the author mask as
+    # absent or validated.
+    allow_unknown_mask_segmentation: bool = False
+    tissue_bins: int = 256
+    mask_decode_budget: int = 1_073_741_824
     segmentation_parameters: dict = field(default_factory=lambda: {
         "diameter": None, "bsize": 256, "batch_size": 4,
         "tile_overlap": 0.1, "flow_threshold": 0.4,
@@ -120,3 +154,35 @@ class ImageResult:
     products: dict[str, str]
     gaps: list[str]
     reused: bool = False
+
+
+@dataclass
+class CropSample:
+    """Paired input-local pixels and measured validity; labels keep their mask identity."""
+
+    pixels: np.ndarray
+    labels: np.ndarray | None
+    spatial_valid: np.ndarray
+    origin_xy: tuple[int, int]
+    mask_identity: str | None = None
+
+
+@dataclass(frozen=True)
+class ViewGeometry:
+    """Crop-local half-open window, square output and one shared discrete transform."""
+
+    window: Window
+    size: int
+    flip_x: bool = False
+    flip_y: bool = False
+    quarter_turns: int = 0
+
+
+@dataclass
+class ViewSample:
+    """Transformed arrays, input pixel-center affine and original visible cell indices."""
+
+    sample: CropSample
+    input_to_view: np.ndarray
+    view_to_input: np.ndarray
+    cell_indices: np.ndarray
