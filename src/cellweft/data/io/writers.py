@@ -64,7 +64,7 @@ def write_image(path: Path, shape: tuple[int, int, int], dtype: np.dtype,
                     yield tile
             writer.write(data=tiles(), shape=(h, w), dtype=dtype,
                          tile=(tile_size, tile_size), compression=compression,
-                         photometric="minisblack", metadata=None)
+                         photometric="minisblack", metadata=None, maxworkers=2)
 
 
 def write_table(path: Path, table: pd.DataFrame) -> None:
@@ -85,17 +85,38 @@ def publish_image(staging: Path, destination: Path, metadata: dict) -> None:
     Removing the previous completion record first prevents interrupted updates
     from being mistaken for a complete image. Readers use metadata references.
     """
+    from cellweft.data.io.publication import resource_lock
+    from cellweft.data.preparation.validation import validate_products
     destination.mkdir(parents=True, exist_ok=True)
-    (destination / "metadata.json").unlink(missing_ok=True)
-    for path in staging.iterdir():
-        if path.is_file():
-            os.replace(path, destination / path.name)
-    write_json(destination / "metadata.json", metadata)
+    with resource_lock(destination):
+        current_path = destination / "metadata.json"
+        current = json.loads(current_path.read_text()) if current_path.exists() else {}
+        if current and current.get("request") != metadata.get("request"):
+            raise ValueError("Publication request is no longer the active image revision")
+        old_task, task = current.get("segmentation_task"), metadata.get("segmentation_task")
+        if old_task and task and old_task["task_id"] != task["task_id"]:
+            raise ValueError("Publication contains an obsolete segmentation attempt")
+        actual = {key:str(staging/Path(path).name) if (staging/Path(path).name).is_file() else path
+                  for key,path in metadata["products"].items()}
+        validate_products(actual,tuple(metadata["shape_yx"]))
+        affected = {key for key,path in metadata["products"].items() if (staging/Path(path).name).is_file()}
+        incomplete = dict(current)
+        incomplete["products"] = {key:path for key,path in current.get("products",{}).items() if key not in affected}
+        incomplete["completed"] = [key for key in current.get("completed",[]) if key not in affected]
+        incomplete["publication_incomplete"] = True
+        write_json(current_path,incomplete)
+        for path in staging.iterdir():
+            if path.is_file(): os.replace(path,destination/path.name)
+        validate_products(metadata["products"],tuple(metadata["shape_yx"]))
+        write_json(current_path,metadata)
 
 
 def publish_study(index: pd.DataFrame, output: Path, registry: Path) -> None:
     """Write the seven-field index and manifest referencing actual image metadata."""
-    write_table(output / "images.parquet", index)
+    existing = output / "images.parquet"
+    if existing.exists() and "input_image_path" in pd.read_parquet(existing).columns:
+        raise ValueError("Legacy seven-field publisher cannot overwrite reviewed input metadata")
+    write_table(existing, index)
     images = [str(Path("images") / name / "metadata.json") for name in index.image_id
               if (output / "images" / name / "metadata.json").is_file()]
     write_json(output / "manifest.json", {
