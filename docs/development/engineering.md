@@ -1,82 +1,45 @@
 # 工程实施与验收
 
-本文维护资源预算、集成步骤和工程验收；模型与训练的科学约束见[模型](../architecture/model.md)、[训练](../architecture/training.md)，协作边界见[AGENTS](../../AGENTS.md)。
+本页维护资源测量、集成、实施顺序和工程验收。结构、训练、输入及编辑分别见[模型规范](../architecture/model.md)、[训练规范](../architecture/training.md)、[数据合同](../architecture/data_contract.md)与[编辑规范](../architecture/editing.md)。协作要求见[AGENTS](../../AGENTS.md)，实施进度见[当前状态](../project/status.md)。
 
-2026-10-19 图像基座按[模型规范](../architecture/model.md)开头的最新决定执行；本页旧 DINOv3 集成、256 crop 面积预算及 96 local 验收待独立迁移重核。图像准备与索引以[数据准备](../data/preparation.md)、[数据合同](../architecture/data_contract.md)为准：旧 Special markers 输入要求由三去向规则取代，近邻范围收紧到独立 image_id。基础crop已固定为原生224×224、步长112；面积预算按实际µm/px计算。
+## 1. 资源与实现策略
 
-## 1. 预算与实现策略
+按实际 manifest 统计患者、图像、panel、细胞及可采样窗口。基础切窗见[准备规范§7](../data/preparation.md#7-crop-与训练视图)，bootstrap 资源和优化配置见[训练规范](../architecture/training.md)。
 
-预算假设为 15,000 张 1,000×1,000 图像、平均 40 markers、每图 500–2,000 cells：约 750 万–3,000 万 cells。
-256×256 crop 面积占比 6.5536%，面积平均约 33–131 cells，不是密集区上限；约 22.9 万面积等价 crops，重叠采样不增加独立患者数。
-约 6,000 亿强度值，未压缩 16-bit 约 1.2 TB、float32 约 2.4 TB。实际 manifest 和 batch 使用真实尺寸、panel 与 cell 数，不硬编码 512 cells/crop。
-资源目标为持续可用的一台八卡 80GB/96GB 节点（原包候选 H800/RTX PRO 6000）；初始化先 CPU/单卡 smoke。图像可用全节点，cell/joint/下游轮转或分卡。
-主模型约 1.1–1.3 亿参数、默认 DINO/iBOT heads 额外约 4,600 万，均为待实例化核对的估算。
-分别统计 inference backbone、active trainable、frozen、EMA、optimizer states 与 activation peak；冻结参数仍属于模型总量。
-BF16 可配置，CPU smoke 用 float32；使用动态 masks/bucketing、unique-cell gather、crop-wise I/O、局部 kNN、efficient attention 和 activation checkpointing，按阶段选择 FSDP/DDP。
-真实 profiler 决定 microbatch；分别记录 gradient accumulation batch 与对比/Sinkhorn 每次 forward 的有效 batch。
-在 synthetic 和小型公开 manifest 上运行 50–200 steps，分别统计 image/cell/joint 的 samples/s、cells/s、tokens/s、data wait、GPU peak memory、参数与训练比例；不预设 GPU-days。
-Checkpoint 恢复包含 optimizer、EMA、scheduler、RNG、sampler、config/source hashes。Cache key 包含模型版本、输入 hash、normalization、edit 和 geometry transform；编辑后不得命中旧 contextual/image 特征。
+实测资源预算覆盖各 student／EMA 模块、优化器、全部视图、反向激活与实例权重图，按实际实例化统计参数。单独测量冻结编码器后 decoder 训练的显存及吞吐，记录训练硬件与准备节点。恢复合同见[训练规范§4](../architecture/training.md#4-梯度ema-与导出)。
 
-## 2. 来源与集成
+## 2. 来源与实现参考
 
-参考入口统一见[references.md](../references.md)。实际集成时建立 configs/sources.yaml，记录 URL、访问日期、role、commit/hash、许可和核验状态；本次整理不生成虚构锁定值。
-论文、代码、权重和数据分别记录许可。main URL 不替代固定版本，import 不自动下载；缺依赖报告 offline/缺失状态。
-第三方代码放置遵循[架构](../architecture/overview.md)和[存储](../architecture/storage.md)，原 Prompt 的旧文件名和 outputs/.gitkeep 不再作为创建要求。
+DINOv2 提供多视图、DINO／iBOT heads、KoLeo、teacher targets 及 EMA；Mask-Adapter 提供实例条件化权重读出；VirTues 提供蛋白遮盖与 Transformer 像素 decoder。具体来源见[参考索引](../references.md)。CellWeft 的多蛋白 tokenizer、8×8 网格、whole-cell MSE、配套 adapter EMA 和冻结读出阶段由本项目规范定义。
+
+实际集成时在现有 `configs/sources.yaml` 登记所用 revision、URL、role、许可与访问日期。采用明确的本地依赖路径，缺少依赖时报告具体缺口。参考源码存在、文档规格完成和运行接线完成分别记录。
 
 ## 3. 实施顺序
 
-1. 检查 Git、已有文件、Python/PyTorch/CUDA/GPU；确认环境事实和已有工作。
-2. 明确研究/来源/数据合同及配置；确认正式值与 provisional 候选分开。
-3. 构建不同 panels、masks、坐标、背景与重叠 crops 的 synthetic fixtures；确认几何对应。
-4. 实现 bank、PatchEmbed、Intrinsic/Neighborhood、Fusion、pooling 和 edit engine 的最小完整前向；确认公共 IO。
-5. 接入官方 DINOv3，先验 metadata 和 forward 再接训练；缺依赖时报告阻塞及可执行的下一步。
-6. 实现 marker/latent/alignment 目标、冻结与 EMA，运行少量 synthetic steps；确认梯度路径。
-7. 运行 baseline/deleted forward，导出表征、差异和编辑记录；确认双视图一致及 ID 对齐。
-8. 运行对应 pytest，报告通过/失败/跳过的数量及原因；不把 skip 记作集成成功。
-9. 生成实际参数报告和短 profiler；仅报告实际测得的吞吐。
-10. 提供八卡 torchrun 模板；初始化不自动启动长训练。
+1. 读取当前规范与工作区变更，接入已有 image／mask／whole-cell 目标及 MAP 资产；核对 patient split、marker 顺序和来源有效域。
+2. 接入 batch 与训练视图，核对[空间对应](../architecture/data_contract.md#4-空间对应)及网格边界。
+3. 接入图像主干和实例读出，执行 §4 的张量和实例检查。
+4. 接入[联合目标与 EMA](../architecture/training.md)，核对梯度流、更新频率和恢复。
+5. 完成 M3 短程训练接线验收：检查几何、loss 归约、梯度、EMA 与恢复，并测量候选配置的显存、吞吐及 I/O。
+6. 完成 M6 正式基座预训练与 checkpoint 交付，登记实际训练范围、配置和资源结果。
+7. 在 M7 接入共享像素 decoder、cell 注释、image／patient MIL 和固定表征检索。按[表征评价](../evaluation/representation.md)核对任务成员及评分域。
+8. 在 M7 接入 Figure 5 输入编辑与固定 MIL，按[编辑规范](../architecture/editing.md)和[临床实施流程](clinical_figure4_5_workflow.md)验收。
 
-## 4. 工程验收清单
+## 4. 必要工程检查
 
-以下保留原 Prompt 的 N1–N5 / 1–35 对应编号，属于后续验收要求，不是已通过结果。
+1. 完整有效 224/8 输入输出 784×768 patch features 和一个 768 维 CLS；位置编码随 DINO 视图网格一致变化。
+2. Marker 与图像通道成对重排保持输出一致；未测量和 padding 不作为真实信号，真实零与缺失由观测状态区分。单层 summary-query pooling 与其完整单层 summary 输出实现对照一致。
+3. Instance mask 只进入主干后的 adapter；保持图像不变而改变 mask 时 CLS 不变，cell 读出按新实例重新计算。每 crop 一次图像编码，实例分块与整批读出结果及梯度一致。
+4. Centroid 在半开窗口内决定细胞归属，跨 patch 的实例通过 mask 聚合；截断实例保持 whole-cell 监督。没有有效细胞的 crop 仍提供 DINO／iBOT 表征，cell loss 按有效 crop／cell／marker 归约。
+5. 按[训练规范](../architecture/training.md)验证 iBOT 几何匹配、whole-cell 梯度、固定参数边界、配套 EMA 及恢复连续性。
+6. 验证共享 decoder 的像素重组、编码器冻结、M4 目标全局留出及既定隐藏有效像素评分。
+7. 验证编辑 no-op、观测状态、受影响窗口覆盖和完整 bag 更新，比较增量结果与同配置全量重编码。
+8. CLI 使用显式配置，tracker 默认 offline／disabled。短程运行记录有限数值、吞吐和显存。
 
-1. D=20/40/60 global 输入均输出 256 spatial tokens，特殊 tokens 单列。
-2. 96×96 local 输出 36 spatial positions。
-3. Marker-image 成对重排在 eval 下保持一致。
-4. Padding/未测量 marker 不影响合法输出，真实零值不作 missing。
-5. Special markers 可运行，无虚构 protein 映射。
-6. Cell ID 与行号分离，重排行不改变邻域含义。
-7. kNN 不跨 slide，不足 k 和零邻居行为明确。
-8. 裁剪/旋转/翻转后 image、mask、coordinate、footprint 一致。
-9. Overlap crops 和 halo 共享 global edit set。
-10. No-op 输出一致。
-11. 删除目标从所有 student neighborhoods 消失。
-12. 全通道实例像素被处理，实例外像素不变。
-13. 不删除整 patch，不改变同 patch 其他细胞。
-14. 全局 marker edit 同步两分支。
-15. Niche deletion 等于同一去重 cell 集合 deletion。
-16. Neighbor deletion 不改变 surviving intrinsic。
-17. 编辑后不读旧 contextual/image cache。
-18. Train masking 不泄漏目标内容，teacher targets 完整。
-19. Inference deletion 不恢复或重插目标 cells。
-20. 编辑不重估 normalization。
-21. Cell pretraining 为 Intrinsic 和 Neighborhood 提供对应梯度。
-22. Frozen joint 中基座不变，Fusion/predictor 得到梯度并更新。
-23. 双方向 cross-attention 均有通向 loss 的梯度。
-24. Teacher 无梯度，EMA 仅更新指定模块。
-25. Partial unfreeze 仅更新指定末端，autograd 连通。
-26. Hints 仅进入 predictor。
-27. 顶层 train() 不意外改变冻结 eval 状态。
-28. 固定 seed 恢复一步可复现，save/load 保持 edit semantics。
-29. Alignment 在单/多 positive、padding、无合法 negatives 时不产生 NaN。
-30. 可记录 latent variance/norm 和每项 loss 的统计，不将塌缩零 loss 视为成功。
-31. 正式配置实际调用官方 DINOv3 adapter。
-32. 缺 upstream 的集成检查明确 skip reason。
-33. 正式 local views/prototypes/head sizes 与锁定来源和批准覆盖一致。
-34. Mock bank 标记 synthetic，不用于生物结论。
-35. CLI 不默认启动 TB 下载、tracker 上传或长训练。
+按本次实施范围执行检查，实际验证见[当前状态](../project/status.md)。
 
-## 5. 待实现 CLI 与交付
+## 5. 目标 CLI 与交付
 
-目标命令：cellweft validate-data、build-indices、prepare-protein-bank、smoke-test、pretrain-image、pretrain-cell、pretrain-joint、export-embeddings、apply-edit、compare-embeddings、profile。这些是接口规划，尚未实现。
-交付报告列出实际创建/修改文件与当前目录树、已实现设计、命令与测试、依赖/upstream/config/许可状态、实际参数/冻结/梯度证据、未完成项和下一条可执行命令。未测得项明确说明，不用空类或 toy 替代完成声明。
+待实现模型入口统一为 `cellweft pretrain`；数据检查、蛋白 bank、smoke、export-embeddings、apply-edit、compare-embeddings 和 profile 按职责提供入口。现有数据脚本继续按[准备实现说明](../../scripts/data/preparation/README.md)使用。
+
+交付列出实际文件改动、可执行命令、检查结果、依赖与参数版本、短程资源结果及下一步；模型与训练完成状态以实际运行结果为准。
