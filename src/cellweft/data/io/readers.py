@@ -19,31 +19,53 @@ def windows(shape: tuple[int, int], size: int) -> Iterator[Window]:
             yield x, y, min(x + size, w), min(y + size, h)
 
 
-def read_tiff_window(tif: tifffile.TiffFile, page_index: int, window: Window) -> np.ndarray:
+def read_tiff_window(tif: tifffile.TiffFile, page_index: int, window: Window,
+                     *, page: tifffile.TiffPage | None = None,
+                     segment_cache: dict | None = None) -> np.ndarray:
     """Decode only intersecting scalar TIFF tiles/strips into a YX window.
 
-    The largest decoded segment is a bound imposed by the source layout.
+    Uncompressed contiguous pages map only the requested rows, avoiding repeated
+    whole-strip copies. Other layouts decode intersecting segments.
     Color/sample-packed pages require explicit source adaptation.
     """
-    page = tif.pages[page_index]
+    if page is None:
+        page = tif.pages[page_index].aspage()
     if page.ndim != 2 or page.samplesperpixel != 1:
         raise ValueError("Expected scalar YX TIFF page")
     x0, y0, x1, y1 = window
     h, w = page.shape
     if not (0 <= x0 < x1 <= w and 0 <= y0 < y1 <= h):
         raise ValueError(f"Window {window} outside TIFF YX {page.shape}")
+    if (page.is_final and tif.filehandle.is_file and page.dtype is not None
+            and sum(page.databytecounts) == page.nbytes):
+        if page.dataoffsets[0] + page.nbytes > tif.filehandle.size:
+            raise ValueError("TIFF image data exceeds the logical file size")
+        rows = tif.filehandle.memmap_array(
+            tif.byteorder + page.dtype.char, (y1 - y0, w),
+            offset=page.dataoffsets[0] + y0 * w * page.dtype.itemsize,
+            mode="r",
+        )
+        return np.array(rows[:, x0:x1], dtype=page.dtype, copy=True)
     out = np.zeros((y1 - y0, x1 - x0), dtype=page.dtype)
     th, tw = (page.tilelength, page.tilewidth) if page.is_tiled else (page.rowsperstrip, w)
     columns = (w + tw - 1) // tw
     for ty in range(y0 // th, (y1 - 1) // th + 1):
         for tx in range(x0 // tw, (x1 - 1) // tw + 1):
             i = ty * columns + tx
-            fh = tif.filehandle
-            fh.seek(page.dataoffsets[i])
-            data, _, _ = page.decode(fh.read(page.databytecounts[i]), i,
-                                      jpegtables=page.jpegtables)
-            if data is None:
-                raise ValueError(f"Missing TIFF segment {i}; declare the acquisition validity explicitly")
+            key = (tif, page_index, i)
+            if segment_cache is not None and segment_cache["key"] == key:
+                data = segment_cache["data"]
+            else:
+                if segment_cache is not None:
+                    segment_cache["key"] = segment_cache["data"] = None
+                fh = tif.filehandle
+                fh.seek(page.dataoffsets[i])
+                data, _, _ = page.decode(fh.read(page.databytecounts[i]), i,
+                                          jpegtables=page.jpegtables)
+                if data is None:
+                    raise ValueError(f"Missing TIFF segment {i}; declare the acquisition validity explicitly")
+                if segment_cache is not None and data.nbytes <= 128 * 1024**2:
+                    segment_cache["key"], segment_cache["data"] = key, data
             segment = data[0, :, :, 0]
             sy, sx = ty * th, tx * tw
             a, b, c, d = max(x0, sx), max(y0, sy), min(x1, sx + tw), min(y1, sy + th)
@@ -58,13 +80,16 @@ class SourceReader:
         self.source = source
         self._valid = None
         self._tiffs = []
+        self._tiff_segment_cache = {"key": None, "data": None}
+        stack.callback(self._tiff_segment_cache.clear)
         if source.kind in {"tiff", "tiff_planes"}:
             paths = source.paths if source.kind == "tiff_planes" else (source.path,)
             self._tiffs = [stack.enter_context(tifffile.TiffFile(p)) for p in paths]
             if source.kind == "tiff_planes" and len(paths) != len(source.channels):
                 raise ValueError("TIFF plane paths and channel indices must have equal length")
-            pages = [self._tiffs[i if source.kind == "tiff_planes" else 0].pages[c]
-                     for i, c in enumerate(source.channels)]
+            self._pages = [self._tiffs[i if source.kind == "tiff_planes" else 0].pages[c].aspage()
+                           for i, c in enumerate(source.channels)]
+            pages = self._pages
             native = pages[0].shape
             if len(native) != 2 or any(p.shape != native or p.dtype != pages[0].dtype for p in pages):
                 raise ValueError("Selected TIFF channels must have matching scalar shape and dtype")
@@ -115,6 +140,9 @@ class SourceReader:
             self._valid[y, x] = True
             if int(self._valid.sum()) != len(x):
                 raise ValueError("Duplicate MCD pixel coordinates need source-specific resolution")
+            self._mcd_records = raw
+            self._record_index = np.full(native, -1, dtype=np.int64)
+            self._record_index[y, x] = np.arange(len(x))
         else:
             raise ValueError(f"Unsupported source kind: {source.kind}")
         h, w = native
@@ -125,8 +153,13 @@ class SourceReader:
         self.shape = (len(source.channels), y1-y0, x1-x0)
         if source.valid_mask:
             self._valid_tif = stack.enter_context(tifffile.TiffFile(source.valid_mask))
+            self._valid_page = self._valid_tif.pages[0].aspage()
         else:
             self._valid_tif = None
+            self._valid_page = None
+        self._sample_tif = (stack.enter_context(tifffile.TiffFile(source.sample_region))
+                            if source.sample_region else None)
+        self._sample_page = self._sample_tif.pages[0].aspage() if self._sample_tif else None
 
     def read_window(self, channels: list[int], window: Window) -> np.ndarray:
         """Return independent CYX pixels in the local image coordinate frame."""
@@ -138,7 +171,9 @@ class SourceReader:
         native = [self.source.channels[i] for i in channels]
         if self.source.kind in {"tiff", "tiff_planes"}:
             return np.stack([read_tiff_window(self._tiffs[i if self.source.kind == "tiff_planes" else 0],
-                                               self.source.channels[i], region) for i in channels])
+                                               self.source.channels[i], region, page=self._pages[i],
+                                               segment_cache=self._tiff_segment_cache)
+                             for i in channels])
         x0, y0, x1, y1 = region
         if self.source.kind == "zarr":
             selection = (native, slice(y0, y1), slice(x0, x1))
@@ -148,17 +183,34 @@ class SourceReader:
         if self.source.kind == "ims":
             return np.stack([np.asarray(self._datasets[i][self.source.z_index, y0:y1, x0:x1])
                              for i in channels])
-        return self._mcd.read_acquisition(self._acquisition, channels=native, region=region)
+        # Reuse the coordinate index across tiles; readimc otherwise scans and
+        # copies all acquisition records for every channel/window request.
+        indices = self._record_index[y0:y1, x0:x1]
+        valid = indices >= 0
+        result = np.zeros((len(native), y1-y0, x1-x0), dtype=self.dtype)
+        for output, channel in enumerate(native):
+            result[output, valid] = self._mcd_records[indices[valid], channel + 3]
+        return result
 
     def valid_window(self, window: Window) -> np.ndarray:
-        """Return measured-pixel validity, independently of signal intensity."""
+        """Intersect measured pixels and an optional sample domain, independent of signal."""
         x0, y0, x1, y1 = window
         ox, oy = self.origin[:2]
         result = np.ones((y1-y0, x1-x0), dtype=bool)
+        if self.source.valid_bounds is not None:
+            a, b, c, d = self.source.valid_bounds
+            yy, xx = np.ogrid[y0:y1, x0:x1]
+            result &= (xx >= a) & (xx < c) & (yy >= b) & (yy < d)
         if self._valid is not None:
             result &= self._valid[y0+oy:y1+oy, x0+ox:x1+ox]
-        if self._valid_tif is not None:
-            result &= read_tiff_window(self._valid_tif, 0, (x0+ox,y0+oy,x1+ox,y1+oy)).astype(bool)
+        for domain, page in ((self._valid_tif, self._valid_page),
+                             (self._sample_tif, self._sample_page)):
+            if domain is None:
+                continue
+            declared = read_tiff_window(domain, 0, (x0+ox,y0+oy,x1+ox,y1+oy), page=page)
+            if not np.isin(declared,[0,1]).all():
+                raise ValueError("Processing domain must contain only zero and one")
+            result &= declared.astype(bool)
         return result
 
     def iter_blocks(self, channels: list[int], block_size: int) -> Iterator[ImageBlock]:
