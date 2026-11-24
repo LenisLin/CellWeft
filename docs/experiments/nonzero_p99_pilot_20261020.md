@@ -2,7 +2,7 @@
 
 2026-10-20。完成 12 个 case、29,535 个固定 CP_B 实例、458 个 case×蛋白测量通道的比较。非零像素 P99 使 51 个原本分母为零但仍有信号的通道可以计算；另 1 个全零通道保持为零。**数值缺口得到解决，但本轮不能证明非零信号都可信，也不足以确认统一生产方案。**
 
-[完整图文报告](/mnt/NAS_21T/ProjectData/CellWeft/results/nonzero_p99_pilot_20261020/run02/report.html) · [逐通道统计](/mnt/NAS_21T/ProjectData/CellWeft/results/nonzero_p99_pilot_20261020/run02/channel_comparison.csv) · [51 个恢复计算的通道](/mnt/NAS_21T/ProjectData/CellWeft/results/nonzero_p99_pilot_20261020/run02/recovered_channels.csv) · [数值核验](/mnt/NAS_21T/ProjectData/CellWeft/results/nonzero_p99_pilot_20261020/run02/verification.json)
+[完整图文报告](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/nonzero_p99_pilot_20261020/run02/report.html) · [逐通道统计](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/nonzero_p99_pilot_20261020/run02/channel_comparison.csv) · [51 个恢复计算的通道](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/nonzero_p99_pilot_20261020/run02/recovered_channels.csv) · [数值核验](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/nonzero_p99_pilot_20261020/run02/verification.json)
 
 ## 比较设计
 
@@ -65,4 +65,4 @@
 - 首次 run01 完成 10 个 case 后因 NumPy 标量/向量 percentile 返回精度差异触发比较断言；使用两侧一致的向量分位数调用后，run02 完整通过。run01 保留不完整说明，不作为交付结果。
 - 每 case 保存两份 float32 表达 Parquet、CellTable、逐通道统计及整 ROI 图。原始文件和已有 mask 保持不变；未执行新分割或训练。Nirmal 旧 mask 部分实例贴近核的限制仍保留，本轮不等同于 whole-cell 生物学验收。
 
-实现：[05_compare_nonzero_p99.py](/home/lenislin/Experiment/projects/CellWeft/scripts/experiments/segmentation_pilot/05_compare_nonzero_p99.py)；[配置](/home/lenislin/Experiment/projects/CellWeft/configs/experiments/nonzero_p99_pilot_20261020.json)。项目环境执行 `--config`，重跑前指定新输出目录。NAS 成功输出为 `results/nonzero_p99_pilot_20261020/run02/`；保存了配置和执行代码副本。这是隔离实验格式，不代表正式存储合同已确定。
+实现：[05_compare_nonzero_p99.py](/home/lenislin/Experiment/projects/CellWeft/scripts/experiments/segmentation_pilot/05_compare_nonzero_p99.py)；[配置](/home/lenislin/Experiment/projects/CellWeft/configs/experiments/nonzero_p99_pilot_20261020.json)。项目环境执行 `--config`，重跑前指定新输出目录。NAS 成功输出现存于 `processed/_experiments/nonzero_p99_pilot_20261020/run02/`；保存了配置和执行代码副本。这是隔离实验格式，不代表正式存储合同已确定。
