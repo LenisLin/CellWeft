@@ -15,7 +15,10 @@ import time
 
 for variable in ["OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS"]:
     os.environ[variable] = "8"
-os.environ.setdefault("MPLCONFIGDIR", "/mnt/NAS_21T/ProjectData/CellWeft/cache/matplotlib")
+os.environ.setdefault(
+    "MPLCONFIGDIR",
+    str(Path(__file__).resolve().parents[3] / ".cache/cellweft/runtime/matplotlib"),
+)
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
