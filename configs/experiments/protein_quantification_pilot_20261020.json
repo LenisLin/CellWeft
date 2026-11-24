@@ -1,6 +1,6 @@
 {
-  "pilot_root": "/mnt/NAS_21T/ProjectData/CellWeft/results/segmentation_pilot_20261019/run01",
-  "output": "/mnt/NAS_21T/ProjectData/CellWeft/results/protein_quantification_pilot_20261020/run02",
+  "pilot_root": "/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/segmentation_pilot_20261019/run01",
+  "output": "/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/protein_quantification_pilot_20261020/run02",
   "mask_scheme": "CP_B",
   "normalization": "per-channel exact P1/P99 linear clipping to [0,1], all fixed-ROI pixels including background",
   "statistical_domain": "original segmentation-pilot ROI; NOT full-slide statistics for cropped cases",
@@ -1546,7 +1546,7 @@
           "status": "published_source_resolution_contract",
           "unit": "um/px",
           "paths": [
-            "/mnt/NAS_21T/ProjectData/CellWeft/cache/collection_20261018/spora_inventory/monkman2024spatial/native_evidence.json"
+            "/mnt/NAS_21T/ProjectData/CellWeft/processed/Monkman2024_CODEX_NSCLC/preparation_evidence/native_evidence.json"
           ],
           "basis": "Source inventory binds spora-submissions/monkman2024spatial/codex/0_3775mpp/images/ to highest_published_mpp=0.3775; actual native shape checked. Embedded NGFF [1,1] is inconsistent and not used. No independent microscope-calibration audit."
         },
@@ -1870,7 +1870,7 @@
           "status": "published_source_resolution_contract",
           "unit": "um/px",
           "paths": [
-            "/mnt/NAS_21T/ProjectData/CellWeft/cache/collection_20261018/spora_inventory/phillips2021immune/native_evidence.json"
+            "/mnt/NAS_21T/ProjectData/CellWeft/processed/Phillips2021_CODEX_CutaneousTCellLymphoma/preparation_evidence/native_evidence.json"
           ],
           "basis": "Source inventory binds spora-submissions/phillips2021immune/codex/0_37744mpp/images/ to highest_published_mpp=0.37744; actual native shape checked. Embedded NGFF [1,1] is inconsistent and not used. No independent microscope-calibration audit."
         },
