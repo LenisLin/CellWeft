@@ -21,6 +21,7 @@ PYTHONPATH=src .venv-data/bin/python scripts/data/preparation/02_tu2026_study_in
 - `Allam2024_IMC_NormalSLO.py --metadata-only` 生成来源清单和 S1 提案。`--output-root <候选父目录> --s1 <候选S1>` 导出 TIFF，`--verify-only` 读回结构和像素窗口。
 - `Sorin2023_IMC_Lung.py --output-root <候选study目录> --s1 <候选S1> --limit 0` 刷新输入表。`--shard-count` 和 `--shard-index` 划分源成员。Allam 与 Sorin 在正式 S1 已登记该 study 时默认复用当前行。
 - `biad3612_codex_hnscc.py --job <任务目录> --wait-seconds 90` 复用版本匹配的产物并处理新到齐 core。已确认损坏成员按 inode、大小和 mtime／ctime 复用跨会话记录。`--metadata-only` 在原 writer 退出后补录字段规则和语义追查，并保留 input 像素。
+- Feng 膀胱癌的既有 520 图完成后，按用户确认范围运行 `feng2026_training_split.py --retire` 删除 5 个未确认患者 ROI；用 `feng2026_review.py --source-root <NAS>/raw/private/Feng2026_IMC_BladderCancer/source --preparer feng2026_input --publish` 更新独立 D01，再执行 `feng2026_training_split.py --publish` 更新逐图绑定和正式实验训练表，最后运行 `feng2026_summary.py` 核对当前 515 图。以上入口均使用 `PYTHONPATH=src .venv-data/bin/python`；[固定患者划分](../../../docs/development/imc_20240725_63_preparation.md#训练与内部验证)及组织采样待核验状态保留。
 
 来源包脚本使用 `metadata_source_directory` 临时还原读入成员，`metadata_source_relative` 生成 bundle/member 引用，来源跟进通过 `publish_metadata_sources` 写回。来源包格式和目录见[存储规范](../../../docs/architecture/storage.md#来源-metadata-单文件归并)。
 
