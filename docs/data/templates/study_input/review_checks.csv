@@ -1,0 +1,13 @@
+﻿check_id,scope,coverage,rule_zh,blocking_scope
+S01,study,全部纳入及排除来源,核对版本、平台、panel、归档成员及image准入依据；来源采集、纳入数量和排除理由可对账,input
+I01,image,全部image,image主键唯一；来源容器、采集、区域与输出路径可定位,input
+I02,image,全部image及非空关联,sample/panel外键可连接；连接后image行数保持,input
+I03,image,全部image,来源完整ROI框或多sample拆分框、原生尺度、方形尺寸、padding及坐标变换一致,input
+I04,image,全部image来源区域及已填注释,结合来源core map或ROI资料核对sample归属、region_annotation、目标完整性及相邻sample分离,input
+P01,panel,全部来源通道,原始有序panel与S1精确对应；未匹配记录有明确处理，保留来源行,input
+P02,panel,全部来源通道,保留S1已选核输入、通过取舍的准入marker及仅用于分割的重复raw channel；mapped及mapping_pending按准入处理；每panel的downstream marker唯一；未写入通道有依据，实际分割用途与S1映射状态分别保留,input
+P03,image,全部image头信息及全部panel,source_channel_count、保留数、output_channel_index及TIFF标准化名称和顺序一致,input
+I05,image,按来源格式、轴、panel和拆分方式分层抽样,来源和输出像素块逐值相等、dtype相同；采集有效域与padding正确,input
+M01,sample,全部身份连接,核对已查阅的本地及公开来源、生物学取样和patient连接依据、sample实际行数及image/sample/patient覆盖；空表或连接缺口记unresolved并限制依赖该连接的用途；技术输入按I01至I05独立判断,metadata_linkage
+M02,sample,全部实际填充字段及非空目标值,按clinical_rules和field_mapping核实语义并重建来源连接与转换；核对目标值、扩展字段、缺失及冲突,clinical_analysis
+D01,study,全部交付文件及修补记录,独立确认问题并持续定向修复及复查；按实际图像、panel、sample与patient连接范围验收；文件数量一致；metadata缺口保留明确结论；无法修复项经用户批准后删除排除，未受影响图像继续有效,input
