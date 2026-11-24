@@ -28,7 +28,7 @@
   "cellpose": {
     "version": "4.2.1.1",
     "model": "cpsam_v2",
-    "weights": "/mnt/NAS_21T/ProjectData/CellWeft/resources/pretrained/cellpose/cpsam_v2/checkpoint",
+    "weights": "/mnt/NAS_21T/ProjectData/CellWeft/raw/shared/pretrained/cellpose/cpsam_v2/checkpoint",
     "upstream_commit": "7c61431b5fbb078f3296754bd15d9f51b320f837",
     "normalize": false,
     "batch_size": 4,
@@ -41,7 +41,7 @@
   "instanseg": {
     "version": "0.1.2",
     "model": "fluorescence_nuclei_and_cells/0.1.1",
-    "weights": "/mnt/NAS_21T/ProjectData/CellWeft/resources/pretrained/instanseg/fluorescence_nuclei_and_cells/0.1.1/instanseg.pt",
+    "weights": "/mnt/NAS_21T/ProjectData/CellWeft/raw/shared/pretrained/instanseg/fluorescence_nuclei_and_cells/0.1.1/instanseg.pt",
     "normalise": false,
     "batch_size": 4,
     "tile_size": 512,
@@ -51,7 +51,7 @@
     "version": "0.9.2",
     "model": "2D_versatile_fluo",
     "device": "CPU",
-    "weights": "/mnt/NAS_21T/ProjectData/CellWeft/resources/pretrained/stardist/2D_versatile_fluo",
+    "weights": "/mnt/NAS_21T/ProjectData/CellWeft/raw/shared/pretrained/stardist/2D_versatile_fluo",
     "input": "prepared B nuclear channel",
     "n_tiles": [
       4,
@@ -59,6 +59,6 @@
     ]
   },
   "interpretation": "Agreement, morphology and resource cost; no biological accuracy ranking without verified ground truth. IBEX is included as multiplex IF; its statistics use same-image disjoint windows. Percentiles and fitted moments describe bounded read domains, not full cohorts.",
-  "manifest": "/mnt/NAS_21T/ProjectData/CellWeft/results/segmentation_pilot_20261019/run01/manifest.json",
-  "result_root": "/mnt/NAS_21T/ProjectData/CellWeft/results/segmentation_pilot_20261019/run01"
+  "manifest": "/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/segmentation_pilot_20261019/run01/manifest.json",
+  "result_root": "/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/segmentation_pilot_20261019/run01"
 }
