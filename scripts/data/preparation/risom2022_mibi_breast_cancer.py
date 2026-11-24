@@ -22,6 +22,8 @@ from cellweft.data.preparation.indexing import build_study_index
 from cellweft.data.preparation.markers import build_marker_registry, build_panel_mapping
 from cellweft.data.preparation.pipeline import prepare_image
 from cellweft.data.preparation.segmentation import CellposeExecutor
+from cellweft.data.preparation.io_coordination import formal_publish_lease
+from cellweft.data.source_metadata import metadata_reference_path
 
 PROJECT = Path(__file__).resolve().parents[3]
 parser = argparse.ArgumentParser(description=__doc__)
@@ -55,18 +57,21 @@ def discover_images(config: dict, data_root: Path) -> dict[str, SourceSpec]:
 
 # 1. Load confirmed semantics and resolve all source images before processing.
 config = yaml.safe_load(args.config.read_text())
-registry_path = args.data_root/config["registry"]
+registry_path = metadata_reference_path(args.data_root, config["registry"])
 registry = build_marker_registry(pd.read_csv(registry_path))
-panels = build_panel_mapping(pd.read_csv(args.data_root/config["confirmed_mapping"]),registry)
+panels = build_panel_mapping(pd.read_csv(metadata_reference_path(args.data_root, config["confirmed_mapping"])),registry)
 sources = discover_images(config,args.data_root)
 output = args.data_root/"processed"/config["study"]
 output.mkdir(parents=True,exist_ok=True)
+if (output/"images.parquet").exists() and "input_image_path" in pd.read_parquet(output/"images.parquet").columns:
+    raise ValueError("Use run_study_preparation.py for reviewed input delivery; legacy entry cannot overwrite it")
 panel_path = output/"panel_mapping.csv"
-pd.concat(panels.values(),ignore_index=True).to_csv(panel_path,index=False)
+with formal_publish_lease(panel_path, directory=panel_path.parent):
+    pd.concat(panels.values(),ignore_index=True).to_csv(panel_path,index=False)
 index = build_study_index(config["study"],sources,panel_path,output)
 publish_study(index,output,registry_path)
 settings = load_settings(PROJECT/"configs/data/preparation/defaults.yaml",PROJECT/".cache/preparation",
-    weights=args.data_root/"resources/pretrained/cellpose/cpsam_v2/checkpoint",batch_size=args.batch_size)
+    weights=args.data_root/"raw/shared/pretrained/cellpose/cpsam_v2/checkpoint",batch_size=args.batch_size)
 
 # 2. Apply the shared per-image chain; one local executor reuses its loaded model.
 executor = CellposeExecutor(args.device) if args.device else None
