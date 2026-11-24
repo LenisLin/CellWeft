@@ -44,6 +44,12 @@ Validation:
 
 使用明确文件清单暂存，审阅 `git diff --cached` 和 `git diff --cached --check`。多行 commit message 写入临时文件，用 `git commit -F` 提交，保留真实换行。`reference/` 整体不提交，也不添加例外。
 
+## 语义版本
+
+项目版本由 `pyproject.toml` 的 `project.version` 维护，Git 使用对应的注释标签 `vMAJOR.MINOR.PATCH`。新增功能递增 MINOR，兼容修复递增 PATCH；稳定 API 的不兼容变更递增 MAJOR。0.x 为开发阶段，接口变更随 MINOR 发布并在提交正文说明。
+
+每次发布先完成逐文件提交和实际验证，再更新版本、建立标签，推送 `main` 与该标签，并核对远程分支及标签指向。Commit 标题按上述 Conventional Commit 约定表达变化类型；版本对应一批完整变更。
+
 ## 远程管理
 
 远程为 `https://github.com/LenisLin/CellWeft.git`，主分支 `main`。保留远程原始 LICENSE 和历史，不强推。后续发布前检查远程是否前进，发生分歧先审阅并整合，不覆盖他人提交。完成推送后核对远程 main 与本地提交。
