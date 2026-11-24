@@ -1,0 +1,145 @@
+﻿table_name,field_name,level,data_type,required,unit,value_set,definition_zh,missing_rule,source_rule
+image_metadata,study,image,string,True,,,项目稳定study标识；与资源表一致,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,image_id,image,string,True,,,study内唯一的独立ROI、TMA core或FOV标识,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,sample_id,image,string,False,,,对应生物学取样；关联sample_metadata.sample_id,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,panel_id,image,string,True,,,该image实际使用的panel；关联panel_mapping.panel_id,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,image_kind,image,category,True,,image_kind,独立成像区域类型,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,source_image_id,image,string,True,,,原始扫描或采集标识；由source_files及容器内位置唯一定位,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,source_files,image,json_array,True,,,NAS相对来源路径的JSON数组；多文件通道顺序由study适配器明确,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,source_format,image,string,True,,,实际来源格式，如mcd、ome_tiff、tiff_planes、ims、zarr,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,source_acquisition_id,image,string,False,,,MCD采集ID；MCD来源必须填写,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,source_z_index,image,integer,False,,,来源具有Z轴并选择单层时填写，从0开始,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,source_t_index,image,integer,False,,,来源具有时间轴并选择单时点时填写，从0开始,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,source_axes,image,string,False,,,来源原生轴或记录布局；由读取适配器解释,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,source_dtype,image,string,True,,,来源解码所得像素dtype；独立输入保持同一dtype,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,source_revision,image,string,True,,,实际使用的来源发布版本或本地来源批次；引用现有study来源记录,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,slide_id,image,string,False,,,来源切片标识,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,core_id,image,string,False,,,来源TMA物理core标识；跨视图保留同一标识,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,roi_id,image,string,False,,,来源ROI标识,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,fov_id,image,string,False,,,来源FOV标识,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,region_annotation,image,string,False,,,来源ROI／core／FOV区域注释原值,来源未提供时留空,来源区域表；连接键及转换记录于field_mapping
+image_metadata,source_x0_px,image,integer,True,pixels,,来源采集原生像素坐标中的左边界，含边界,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,source_y0_px,image,integer,True,pixels,,来源采集原生像素坐标中的上边界，含边界,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,source_x1_px,image,integer,True,pixels,,来源采集原生像素坐标中的右边界，不含边界,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,source_y1_px,image,integer,True,pixels,,来源采集原生像素坐标中的下边界，不含边界,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,pad_left_px,image,integer,True,pixels,,方形画布左侧补边宽度,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,pad_top_px,image,integer,True,pixels,,方形画布上侧补边宽度,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,pad_right_px,image,integer,True,pixels,,方形画布右侧补边宽度,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,pad_bottom_px,image,integer,True,pixels,,方形画布下侧补边宽度,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,height_px,image,integer,True,pixels,,独立image保存后的高度；与width_px相等,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,width_px,image,integer,True,pixels,,独立image保存后的宽度；与height_px相等,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,source_channel_count,image,integer,True,channels,,所选来源采集的完整通道数；对应panel_mapping的全部来源行,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,channel_count,image,integer,True,channels,,本阶段筛选后input.tiff保存的通道数；对应全部非空output_channel_index,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,pixel_size_x_um,image,number,False,um/pixel,,原生X方向像素尺度；来源未知留空,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,pixel_size_y_um,image,number,False,um/pixel,,原生Y方向像素尺度；来源未知留空,允许空白；未知不得填写0或推断值,按来源证据填写
+image_metadata,input_image_path,image,string,True,,,通道筛选后独立方形input.tiff的NAS相对路径；保留来源强度,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,valid_pixels_path,image,string,False,,,来源框内存在未采集位置时引用同尺寸uint8有效域TIFF；实测为1、未采集及padding为0,来源矩形全部实测时留空并由padding字段表达补边,按来源采集记录填写
+image_metadata,intensity_description,image,string,True,,,来源强度含义及已知上游处理,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,split_method,image,category,True,,split_method,独立区域的确定方式,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,split_evidence,image,string,True,,,来源core map、ROI表或已复核区域的依据,必填；存在未决问题时保留待确认,按来源证据填写
+image_metadata,metadata_notes,image,string,False,,,来源身份、样本关联或尺度等具体缺口,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,study,sample,string,True,,,项目稳定study标识,必填；存在未决问题时保留待确认,按来源证据填写
+sample_metadata,sample_id,sample,string,True,,,study内唯一的生物学组织取样标识,必填；存在未决问题时保留待确认,按来源证据填写
+sample_metadata,patient_key,patient,string,False,,,去标识化患者键；同一患者的多个sample共享；对应未知留空,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,source_subject_id,patient,string,False,,,来源去标识化患者编号,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,cohort_id,patient,string,False,,,主要所属队列ID；额外来源记录在patient_source_map,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.primary_cohort_id；来源字段与转换记录于field_mapping
+sample_metadata,center_id,patient,string,False,,,参与研究的研究中心编码（非具体住址）,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.center_id；来源字段与转换记录于field_mapping
+sample_metadata,source_sample_id,sample,string,False,,,原始数据公开或去标识化样本ID,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.source_sample_id；来源字段与转换记录于field_mapping
+sample_metadata,biospecimen_group_id,sample,string,False,,,用于标识多切片/分装来源的同一标本,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.biospecimen_group_id；来源字段与转换记录于field_mapping
+sample_metadata,sample_type,sample,string,False,,,组织、血液、PBMC、血浆等样本类型,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.sample_type；来源字段与转换记录于field_mapping
+sample_metadata,tissue_type,sample,category,False,,tissue_type,肿瘤、邻近正常、血液等组织分组,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.tissue_type；来源字段与转换记录于field_mapping
+sample_metadata,anatomical_site,sample,string,False,,,解剖采集部位,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.anatomical_site；来源字段与转换记录于field_mapping
+sample_metadata,lesion_type,sample,category,False,,lesion_type,原发、转移、复发病灶等,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.lesion_type；来源字段与转换记录于field_mapping
+sample_metadata,tumor_normal_pair_id,sample,string,False,,,肿瘤/正常配对组唯一ID,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.tumor_normal_pair_id；来源字段与转换记录于field_mapping
+sample_metadata,matched_sample_id,sample,string,False,,,匹配的另一份样本ID,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.matched_sample_id；来源字段与转换记录于field_mapping
+sample_metadata,disease_status_at_collection,sample,category,False,,disease_status,采样当时疾病状态,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.disease_status_at_collection；来源字段与转换记录于field_mapping
+sample_metadata,timepoint_label,sample,category,False,,timepoint_label,baseline/on_treatment等标签,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.timepoint_label；来源字段与转换记录于field_mapping
+sample_metadata,collection_day_from_index,sample,integer,False,days,,采样日距index的天数,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.collection_day_from_index；来源字段与转换记录于field_mapping
+sample_metadata,treatment_status_at_collection,sample,string,False,,,采样当时的治疗状态,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.treatment_status_at_collection；来源字段与转换记录于field_mapping
+sample_metadata,collection_method,sample,category,False,,collection_method,活检、手术、抽血等采集方式,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.collection_method；来源字段与转换记录于field_mapping
+sample_metadata,preservation_method,sample,category,False,,preservation_method,冻存、FFPE、新鲜等,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.preservation_method；来源字段与转换记录于field_mapping
+sample_metadata,processing_method,sample,string,False,,,样本分离及处理方法,允许空白；未知不得填写0或推断值,参考原模板 sample_metadata.processing_method；来源字段与转换记录于field_mapping
+sample_metadata,age_at_collection_years,sample,number,False,years,,本次取样时年龄；只有来源明确对应取样时点时填写,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,case_control_status,patient_index,category,False,,case_control_status,病例/对照状态,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.case_control_status；来源字段与转换记录于field_mapping
+sample_metadata,index_event,patient_index,category,False,,time_origin,相对时间的统一零点事件,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.index_event；来源字段与转换记录于field_mapping
+sample_metadata,index_definition_version,patient_index,string,False,,,定义基线/索引事件的方案版本,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.index_definition_version；来源字段与转换记录于field_mapping
+sample_metadata,age_at_index_years,patient_index,number,False,years,,索引时点年龄（年），避免直接存储生日,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.age_at_index_years；来源字段与转换记录于field_mapping
+sample_metadata,age_at_diagnosis_years,patient_index,number,False,years,,首次主要诊断时年龄（年）,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.age_at_diagnosis_years；来源字段与转换记录于field_mapping
+sample_metadata,sex_reported,patient,category,False,,sex_reported,源数据所记录的sex，不推断为出生时性别,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.sex_reported；来源字段与转换记录于field_mapping
+sample_metadata,smoking_status,patient_index,category,False,,smoking_status,索引时吸烟状态,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.smoking_status；来源字段与转换记录于field_mapping
+sample_metadata,bmi_kg_m2,patient_index,number,False,kg/m²,,索引时BMI,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.bmi_kg_m2；来源字段与转换记录于field_mapping
+sample_metadata,ecog_at_index,patient_index,integer,False,,ecog_score,索引时ECOG PS评分,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.ecog_at_index；来源字段与转换记录于field_mapping
+sample_metadata,primary_diagnosis,patient_index,string,False,,,统一后的主要诊断名称；无疾病可用healthy_control,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.primary_diagnosis；来源字段与转换记录于field_mapping
+sample_metadata,primary_diagnosis_code,patient_index,string,False,,,疾病代码，需与体系字段配套,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.primary_diagnosis_code；来源字段与转换记录于field_mapping
+sample_metadata,diagnosis_code_system,patient_index,string,False,,,疾病编码体系及版本（如ICD-10）,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.diagnosis_code_system；来源字段与转换记录于field_mapping
+sample_metadata,primary_site,patient_index,string,False,,,原发组织/解剖部位,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.primary_site；来源字段与转换记录于field_mapping
+sample_metadata,histology,patient_index,string,False,,,标准化病理组织学类型,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.histology；来源字段与转换记录于field_mapping
+sample_metadata,stage_group_at_index,patient_index,string,False,,,索引时疾病分期；避免混用diagnosis stage,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.stage_group_at_index；来源字段与转换记录于field_mapping
+sample_metadata,stage_system,patient_index,string,False,,,分期体系及版本（AJCC/FIGO等）,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.stage_system；来源字段与转换记录于field_mapping
+sample_metadata,stage_basis,patient_index,category,False,,stage_basis,临床或病理分期,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.stage_basis；来源字段与转换记录于field_mapping
+sample_metadata,tnm_t,patient_index,string,False,,,索引时T分期；标注分期版本,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.tnm_t；来源字段与转换记录于field_mapping
+sample_metadata,tnm_n,patient_index,string,False,,,索引时N分期；标注分期版本,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.tnm_n；来源字段与转换记录于field_mapping
+sample_metadata,tnm_m,patient_index,string,False,,,索引时M分期；标注分期版本,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.tnm_m；来源字段与转换记录于field_mapping
+sample_metadata,grade,patient_index,string,False,,,分级及分级体系由字典说明,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.grade；来源字段与转换记录于field_mapping
+sample_metadata,molecular_subtype,patient_index,string,False,,,已定义且可比较的分子亚型；多biomarker存observations_long,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.molecular_subtype；来源字段与转换记录于field_mapping
+sample_metadata,prior_systemic_therapy,patient_index,boolean,False,,boolean,索引时点前是否接受过全身治疗,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.prior_systemic_therapy；来源字段与转换记录于field_mapping
+sample_metadata,prior_therapy_lines,patient_index,integer,False,,,此前治疗线别数,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.prior_therapy_lines；来源字段与转换记录于field_mapping
+sample_metadata,index_therapy_modality,patient_index,category,False,,therapy_modality,指定index治疗的类型,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.index_therapy_modality；来源字段与转换记录于field_mapping
+sample_metadata,index_regimen,patient_index,string,False,,,指定index治疗的标准化方案名,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.index_regimen；来源字段与转换记录于field_mapping
+sample_metadata,response_criteria,patient_index,string,False,,,疗效评估采用的标准及版本,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.response_criteria；来源字段与转换记录于field_mapping
+sample_metadata,best_overall_response,patient_index,category,False,,response,对应index regimen的最佳总体疗效,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.best_overall_response；来源字段与转换记录于field_mapping
+sample_metadata,vital_status,patient_index,category,False,,vital_status,数据截止时的生命状态,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.vital_status；来源字段与转换记录于field_mapping
+sample_metadata,clinical_data_cutoff,patient_index,date,False,,,数据截止日期（研究层面，非患者事件日期）,允许空白；未知不得填写0或推断值,参考原模板 clinical_master.clinical_data_cutoff；来源字段与转换记录于field_mapping
+sample_metadata,last_followup_time,patient_endpoint,number,False,see last_followup_time_unit,,最后随访时间；沿用可核实的来源数值，与单位和起点配套,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,last_followup_time_unit,patient_endpoint,category,False,,time_unit,最后随访时间单位；月或年不机械换算为天,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,last_followup_origin,patient_endpoint,string,False,,,最后随访时间起点及其来源定义；不自动改为本次取样日,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,os_time,patient_endpoint,number,False,see os_time_unit,,OS时间；沿用可核实的来源数值，与单位和起点配套,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,os_time_unit,patient_endpoint,category,False,,time_unit,OS时间单位；月或年不机械换算为天,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,os_origin,patient_endpoint,string,False,,,OS时间起点及其来源定义；不自动改为本次取样日,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,os_event,patient_endpoint,integer,False,,event_indicator,OS事件指示；1为来源定义的事件、0为删失，未知留空,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,os_event_definition,patient_endpoint,string,False,,,OS事件的来源定义；保留其人群、事件范围及判定口径,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,pfs_time,patient_endpoint,number,False,see pfs_time_unit,,PFS时间；沿用可核实的来源数值，与单位和起点配套,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,pfs_time_unit,patient_endpoint,category,False,,time_unit,PFS时间单位；月或年不机械换算为天,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,pfs_origin,patient_endpoint,string,False,,,PFS时间起点及其来源定义；不自动改为本次取样日,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,pfs_event,patient_endpoint,integer,False,,event_indicator,PFS事件指示；1为来源定义的事件、0为删失，未知留空,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,pfs_event_definition,patient_endpoint,string,False,,,PFS事件的来源定义；保留其人群、事件范围及判定口径,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,dfs_time,patient_endpoint,number,False,see dfs_time_unit,,DFS时间；沿用可核实的来源数值，与单位和起点配套,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,dfs_time_unit,patient_endpoint,category,False,,time_unit,DFS时间单位；月或年不机械换算为天,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,dfs_origin,patient_endpoint,string,False,,,DFS时间起点及其来源定义；不自动改为本次取样日,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,dfs_event,patient_endpoint,integer,False,,event_indicator,DFS事件指示；1为来源定义的事件、0为删失，未知留空,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,dfs_event_definition,patient_endpoint,string,False,,,DFS事件的来源定义；保留其人群、事件范围及判定口径,允许空白；未知不得填写0或推断值,按来源证据填写
+sample_metadata,metadata_notes,sample,string,False,,,临床来源冲突、缺口及未能归属到本次取样的信息,允许空白；未知不得填写0或推断值,按来源证据填写
+panel_mapping,panel_id,panel,string,True,,,study内实际panel标识,必填；存在未决问题时保留待确认,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,source_channel_index,panel,integer,True,,,来源通道位置，从0连续编号；排除行也保留,必填；存在未决问题时保留待确认,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,source_name,panel,string,True,,,来源原始通道名；通过来源已确认的对应关系查询S1,必填；存在未决问题时保留待确认,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,marker_id,panel,string,False,,,全局marker身份；按数据合同从S1派生，未决时留空,允许空白；未知不得填写0或推断值,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,mapping_status,panel,category,True,,mapping_status,S1准入状态；区别映射待确认、仅分割与明确排除,必填；存在未决问题时保留待确认,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,role,panel,category,True,,channel_role,实际处理用途：downstream、segmentation-only或exclude；仅为分割保留的重复raw channel使用segmentation-only，S1 mapping_status保持,必填；存在未决问题时保留待确认,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,nuclear,panel,boolean,True,,boolean,选入核分割组；按S1及来源证据保留DNA专用或已复核的Nuc/Nuclear、总H3核输入,必填；存在未决问题时保留待确认,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,body,panel,boolean,True,,boolean,选入膜／胞质组；须保留输入像素，可为downstream或仅用于分割的segmentation-only通道,必填；存在未决问题时保留待确认,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,keep_channel,panel,boolean,True,,boolean,本阶段实际写入input.tiff的通道；保留时必须给出output_channel_index和keep_reason,必填；存在未决问题时保留待确认,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,output_channel_index,panel,integer,False,,,保留通道在input.tiff中的位置；从0连续编号，排除行留空,允许空白；未知不得填写0或推断值,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,keep_reason,panel,string,False,,,保留依据：所选核输入、准入marker、准入但映射待确认，或仅用于分割的重复raw channel,允许空白；未知不得填写0或推断值,来源有序panel＋S1派生；取舍不改变来源行号
+panel_mapping,exclusion_reason,panel,string,False,,,未写入input.tiff的原因；仅用于分割而保留的重复通道在keep_reason说明,允许空白；未知不得填写0或推断值,来源有序panel＋S1派生；取舍不改变来源行号
+field_mapping,study,mapping,string,True,,,本次整理的study标识,必填；存在未决问题时保留待确认,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,source_file,mapping,string,True,,,来源metadata文件的NAS相对路径,必填；存在未决问题时保留待确认,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,source_sheet_or_table,mapping,string,False,,,工作表或来源表名,允许空白；未知不得填写0或推断值,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,source_field,mapping,string,True,,,来源字段名或明确的来源键,必填；存在未决问题时保留待确认,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,target_table,mapping,string,True,,,目标表名,必填；存在未决问题时保留待确认,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,target_field,mapping,string,True,,,目标字段名,必填；存在未决问题时保留待确认,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,join_keys,mapping,string,True,,,来源到image或sample的连接键及多步连接规则,必填；存在未决问题时保留待确认,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,value_mapping,mapping,string,False,,,经核实的分类值映射；JSON对象,允许空白；未知不得填写0或推断值,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,transformation_rule,mapping,string,False,,,明确的类型、单位、派生或格式转换,允许空白；未知不得填写0或推断值,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,time_origin_rule,mapping,string,False,,,临床变量或事件所对应的时间起点,允许空白；未知不得填写0或推断值,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,conflict_rule,mapping,string,False,,,来源冲突的具体取舍依据；未解决则记录问题,允许空白；未知不得填写0或推断值,逐study核对来源；实际规则可保存在现有读取配置中
+field_mapping,notes,mapping,string,False,,,字段缺口或适用范围；扩展字段的定义、类型、单位及时点,无补充说明时留空,逐study核对来源；实际规则可保存在现有读取配置中
+review_results,study,review,string,True,,,复核study标识,必填；存在未决问题时保留待确认,由实际独立复核者填写；结果保存在NAS
+review_results,preparer,review,string,True,,,实际整理者或代理任务标识,必填；存在未决问题时保留待确认,由实际独立复核者填写；结果保存在NAS
+review_results,reviewer,review,string,True,,,独立复核者或代理任务标识；与preparer不同,必填；存在未决问题时保留待确认,由实际独立复核者填写；结果保存在NAS
+review_results,scope,review,category,True,,review_scope,study、image、panel或sample,必填；存在未决问题时保留待确认,由实际独立复核者填写；结果保存在NAS
+review_results,record_id,review,string,True,,,被查记录或明确的抽样集合；study级填写study标识,必填；存在未决问题时保留待确认,由实际独立复核者填写；结果保存在NAS
+review_results,check_id,review,string,True,,,review_checks.csv中的核对项ID,必填；存在未决问题时保留待确认,由实际独立复核者填写；结果保存在NAS
+review_results,result,review,category,True,,review_result,实际核对结果；未核对不能填写pass,必填；存在未决问题时保留待确认,由实际独立复核者填写；结果保存在NAS
+review_results,source_evidence,review,string,True,,,来源文件、工作表/行/字段或来源图像块的可定位位置,必填；存在未决问题时保留待确认,由实际独立复核者填写；结果保存在NAS
+review_results,output_evidence,review,string,True,,,正式输出文件、记录键、通道或图像块位置,必填；存在未决问题时保留待确认,由实际独立复核者填写；结果保存在NAS
+review_results,details,review,string,False,,,差异编号、影响范围、抽样坐标、修补轮次、动作及复查结论,存在差异、修补或不适用项时填写对应说明,由实际整理者记录修补事实并由独立复核者确认结果
