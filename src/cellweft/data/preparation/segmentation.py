@@ -45,20 +45,37 @@ def build_segmentation_input(image: ImageReader, channels: pd.DataFrame, output:
     A varying nuclear composite is required. Zero body is recorded for the
     agreed once-only whole-image judgment of a newly generated mask.
     """
+    failed = channels.numerical_reason.isin(["nonfinite measured pixels", "no measured pixels"])
+    if (failed & (channels.nuclear | channels.body)).any():
+        return {"gap":"selected segmentation channels failed numerical validation"}
     groups = {}
     for group in ("body", "nuclear"):
         rows = channels[channels[group] & channels.tiff_page.notna()]
         groups[group] = rows.tiff_page.astype(int).tolist()
     if not groups["nuclear"]:
         return {"gap": "no effective nuclear channels"}
+    # Bounds only need effective segmentation pages; block values use this local order.
+    selected_pages = []
+    page_positions = {}
+    for pages in groups.values():
+        for page in pages:
+            if page not in page_positions:
+                page_positions[page] = len(selected_pages)
+                selected_pages.append(page)
+    group_positions = {
+        name: [page_positions[page] for page in pages]
+        for name, pages in groups.items()
+    }
     bounds = {name: [np.inf, -np.inf] for name in groups}
-    for block in image.iter_blocks(list(range(image.shape[0])), settings.block_size):
-        for name, pages in groups.items():
-            if pages:
-                composite = block.values[pages].mean(axis=0, dtype=np.float32)
-                bounds[name][0] = min(bounds[name][0], float(composite.min()))
-                bounds[name][1] = max(bounds[name][1], float(composite.max()))
-    if bounds["nuclear"][0] == bounds["nuclear"][1]:
+    for block in image.iter_blocks(selected_pages, settings.block_size):
+        for name, positions in group_positions.items():
+            if positions:
+                composite = block.values[positions].mean(axis=0, dtype=np.float32)
+                measured = composite[block.valid]
+                if measured.size:
+                    bounds[name][0] = min(bounds[name][0], float(measured.min()))
+                    bounds[name][1] = max(bounds[name][1], float(measured.max()))
+    if bounds["nuclear"][0] >= bounds["nuclear"][1]:
         return {"gap": "nuclear composite has no spatial variation"}
     body_missing = not groups["body"] or bounds["body"][0] == bounds["body"][1]
     if body_missing:
@@ -68,7 +85,9 @@ def build_segmentation_input(image: ImageReader, channels: pd.DataFrame, output:
         pages = groups["body" if page == 0 else "nuclear"]
         if not pages:
             return np.zeros((window[3]-window[1], window[2]-window[0]), np.float32)
-        return image.read_window(pages, window).mean(axis=0, dtype=np.float32)
+        signal = image.read_window(pages, window).mean(axis=0, dtype=np.float32)
+        signal[~image.valid_window(window)] = 0
+        return signal
 
     write_image(output, (2, *image.shape[-2:]), np.dtype("float32"), composite,
                 tile_size=settings.tile_size, compression=settings.compression)
@@ -138,8 +157,15 @@ class CellposeExecutor:
     """One lazy local cpsam_v2 model per worker; task parameters determine inference."""
 
     def __init__(self, device: str = "cuda:0", core_size: int = 1024, halo: int = 128,
-                 match_iou: float = 0.5):
+                 match_iou: float = 0.5, *, precision: str = "bf16",
+                 memory_budget_bytes: int | None = None):
         self.device, self.core_size, self.halo, self.match_iou = device, core_size, halo, match_iou
+        if precision not in {"bf16", "fp32"}:
+            raise ValueError("Precision must be bf16 or fp32")
+        self.precision = precision
+        if memory_budget_bytes is not None and memory_budget_bytes <= 0:
+            raise ValueError("CUDA memory budget must be positive")
+        self.memory_budget_bytes = memory_budget_bytes
         self._model = None
         self._weights = None
 
@@ -155,6 +181,8 @@ class CellposeExecutor:
         weights = Path(task["weights"]).resolve(strict=True)
         input_path = input_path or Path(task["input_path"])
         actual = verify_task_inputs(task, input_path, weights)
+        if task["precision"] != self.precision:
+            raise ValueError("Worker precision differs from submitted task")
         import importlib.metadata
         import torch
         from cellpose import models
@@ -165,12 +193,23 @@ class CellposeExecutor:
             raise ValueError("This adapter requires cellpose==4.2.1.1")
         if self.device.startswith("cuda") and not torch.cuda.is_available():
             raise RuntimeError("Requested CUDA device is unavailable")
-        model_identity = (weights, actual["weights"]["sha256"])
+        model_identity = (weights, actual["weights"]["sha256"], self.precision)
         if self._model is None or self._weights != model_identity:
+            if self.memory_budget_bytes is not None:
+                total = torch.cuda.get_device_properties(self.device).total_memory
+                if self.memory_budget_bytes > total:
+                    raise ValueError("CUDA memory budget exceeds physical device memory")
+                # This bounds the torch allocator, not CUDA driver or other process overhead.
+                torch.cuda.set_per_process_memory_fraction(self.memory_budget_bytes / total,
+                                                           device=self.device)
             self._model = models.CellposeModel(gpu=self.device.startswith("cuda"),
-                                               device=torch.device(self.device), pretrained_model=str(weights))
+                                               device=torch.device(self.device), pretrained_model=str(weights),
+                                               use_bfloat16=self.precision == "bf16")
             if Path(self._model.pretrained_model).resolve() != weights:
                 raise RuntimeError("Cellpose did not use the requested local checkpoint")
+            expected_dtype = torch.bfloat16 if self.precision == "bf16" else torch.float32
+            if next(self._model.net.parameters()).dtype != expected_dtype:
+                raise RuntimeError("Cellpose model dtype differs from requested precision")
             self._weights = model_identity
         parameters = dict(task["parameters"])
         result_path = result_path or Path(task["result_path"])
@@ -187,7 +226,7 @@ class CellposeExecutor:
             "task_id":task["task_id"], "request":task["request"], "mask":"mask.tiff",
             "parameters":parameters, "model":"cpsam_v2", "normalize":False,
             "stitching":stitching,
-            "content_identity":actual,
+            "content_identity":actual, "precision":self.precision,
             "whole_cell_confirmed":not task["signal"]["body_missing"],
         })
         return result_path
