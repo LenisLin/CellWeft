@@ -1,6 +1,8 @@
 """Apply manually confirmed identities and source-channel roles."""
 from __future__ import annotations
 
+from pathlib import Path
+
 import pandas as pd
 
 
@@ -46,3 +48,23 @@ def build_panel_mapping(confirmed: pd.DataFrame, registry: pd.DataFrame) -> dict
             raise ValueError(f"{panel}: duplicate protein measurements need manual channel exclusion")
         output[str(panel)] = rows
     return output
+
+
+def registry_from_s1(s1_path: Path) -> pd.DataFrame:
+    """Derive shared downstream identities from S1 without a second confirmation table.
+
+    Pending identities remain explicit. Composite/nonunique accessions are not
+    forced into a canonical protein identifier; original evidence stays in S1.
+    """
+    table = pd.read_csv(s1_path,dtype=str,keep_default_na=False)
+    table = table[~table['Unified marker'].eq('Excluded') &
+                  ~table['Unified marker'].str.endswith(' (segmentation only)')].copy()
+    table['marker_id'] = table['Unified marker'].str.removesuffix(' (mapping pending)')
+    rows = []
+    for marker, group in table.groupby('marker_id',sort=True):
+        accessions = set(group['UniProt accession'])- {''}
+        canonical = next(iter(accessions)) if len(accessions)==1 else ''
+        if any(character in canonical for character in ',; '): canonical = ''
+        rows.append(dict(marker_id=marker,display_name=marker,canonical_protein_id=canonical,
+                         measured_form=marker))
+    return build_marker_registry(pd.DataFrame(rows,columns=REGISTRY_COLUMNS))
