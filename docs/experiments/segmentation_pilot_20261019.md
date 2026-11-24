@@ -2,7 +2,7 @@
 
 2026-10-19。**已完成：12 个不同 study × 5 个组合，共 60 次有效预测，无失败或跳过。** IMC、MIBI、CODEX、多重 IF 各3个study；IF具体为COMET、CyCIF、IBEX。每个study一张源图，小图全图，大图固定ROI（最长边1536px），不声称12张整片均完成分割。原始来源保持只读。
 
-[交互叠加图报告](/mnt/NAS_21T/ProjectData/CellWeft/results/segmentation_pilot_20261019/run01/comparison/report.html) · [逐图CSV](/mnt/NAS_21T/ProjectData/CellWeft/results/segmentation_pilot_20261019/run01/comparison/cell_statistics.csv) · [实例比较CSV](/mnt/NAS_21T/ProjectData/CellWeft/results/segmentation_pilot_20261019/run01/comparison/instance_comparisons.csv) · [冻结样本清单](/mnt/NAS_21T/ProjectData/CellWeft/results/segmentation_pilot_20261019/run01/manifest.json) · [最终独立复核](/mnt/NAS_21T/ProjectData/CellWeft/results/segmentation_pilot_20261019/run01/reviews/cellweft_pilot_final_review.md)
+[交互叠加图报告](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/segmentation_pilot_20261019/run01/comparison/report.html) · [逐图CSV](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/segmentation_pilot_20261019/run01/comparison/cell_statistics.csv) · [实例比较CSV](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/segmentation_pilot_20261019/run01/comparison/instance_comparisons.csv) · [冻结样本清单](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/segmentation_pilot_20261019/run01/manifest.json) · [最终独立复核](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/segmentation_pilot_20261019/run01/reviews/cellweft_pilot_final_review.md)
 
 ## 结论与后续讨论建议
 
