@@ -4,6 +4,6 @@ study: Risom2022_MIBI_BreastCancer
 source_directory: raw/public/Risom2022_MIBI_BreastCancer/htan_duke_release_2_4
 image_glob: Point*.ome.tif
 panel_id: Risom2022_MIBI_BreastCancer:published_marker_panel
-registry: metadata/marker_registry.csv
-confirmed_mapping: metadata/public/Risom2022_MIBI_BreastCancer/confirmed_panel_mapping.csv
+registry: raw/shared/metadata.json#shared/marker_registry.csv
+confirmed_mapping: raw/public/Risom2022_MIBI_BreastCancer/metadata.json#public/Risom2022_MIBI_BreastCancer/confirmed_panel_mapping.csv
 intensity_description: published source intensities
