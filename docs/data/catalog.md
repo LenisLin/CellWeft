@@ -42,6 +42,10 @@
 
 2026-11-24 登记私有膀胱癌 IMC 队列 `Feng2026_IMC_BladderCancer`，数据所有者 Feng，年份 2026，来源别名 `IMC_20240725_63`。本批处理来源索引的 520 个 ROI，复用经核验的来源实例 mask。[队列工作流](../development/imc_20240725_63_preparation.md)
 
+同日用户要求删除 5 个患者连接未确认的 ROI，并将保留的 515 图纳入训练与内部验证。按确认的 `source_patient_key` 固定划分，种子 `20261124`；50 位患者／421 图为 `development_train`，12 位患者／94 图为 `development_validation`。该队列采用训练／内部验证两部分，同一患者的全部 ROI 保持同组。来源及临床原始记录保存在 private；正式实验目录中的患者组仅使用去标识键。
+
+本队列的 `training_split.json` 记录排除、成员和用户授权；同一成员已加入正式 `processed/_catalog/public/experiments.json` 的 `datasets` 和 `tasks.foundation_pretraining.datasets`。其 `members` 仅包含训练图，`validation_members` 指向内部验证图，`fit_splits`／`validation_splits` 显式区分拟合与选参；验证图不参与基座训练拟合。训练输入仅使用已绑定向量的 31 个蛋白。组织采样仍为 `pending`，成员入表不代表窗口已获准采样。直接患者连接支持本次分组；缺少独立 sample 标识继续约束配对和样本合并分析。
+
 GC—TiRank、Melanoma 和 CRLM 的既有原始接入范围为 MCD 与来源 ROI／clinical／panel 表；这些批次沿用原接入选择。混合来源目录按文件建立符号链接，从冷存储恢复的 MCD 保存到 NAS raw/private。Feng2026 队列按上述已确认实例 mask 复用流程执行。公开发布物及原来源保留。
 
 GC—TiRank 的完整队列与公开发布子集沿用同一 study 身份 `Lin2026_IMC_GastricCancer`，public/private 入口引用同一原始文件；来源别名、裁剪版本按独立采集去重。Melanoma 的本地 MCD 补入原 Xiao2022 study。CRLM 保持既有原始 MCD 入口，本地分割与分析结果不接入。
