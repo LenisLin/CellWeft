@@ -9,7 +9,7 @@
 
 ## 已验证数据资产
 
-- 私有膀胱癌 `Feng2026_IMC_BladderCancer` 原处理 520 图；按用户要求删除 5 个患者连接未确认 ROI 后，正式保留 515 图、62 位患者、3,659,156 个细胞，独立 D01 及逐图输入绑定已更新。全部复用核验通过的来源实例 mask，当前 19 张代表图通过数值复核。训练／内部验证固定为 50 位患者／421 图及 12 位患者／94 图，已加入正式 `experiments.json`，验证图不参与拟合。交付见 study 的 `processing_summary.json` 和 `training_split.json`。[队列工作流](../development/imc_20240725_63_preparation.md)
+- 私有膀胱癌 `Feng2026_IMC_BladderCancer` 原处理 520 图；按用户要求删除 5 个患者连接未确认 ROI 后，正式保留 515 图、62 位患者、3,659,156 个细胞，独立 D01 及逐图输入绑定已更新。全部复用核验通过的来源实例 mask，当前 19 张代表图通过数值复核。训练／内部验证固定为 50 位患者／421 图及 12 位患者／94 图，已加入正式 `experiments.json`，验证图不参与拟合。队列、现行划分及来源记录已同步到 `/mnt/disk_8T/CellWeft/` 补充归档，结构及所选文件内容读回通过。交付见 study 的 `processing_summary.json`、`training_split.json` 和盘内补充回执。[队列工作流](../development/imc_20240725_63_preparation.md)
 
 - 主 NAS 已有逐图蛋白图像、实例 mask、细胞索引、whole-cell 定量、邻域、窗口对应和 study 级固定 marker 向量。2026-11-11 回执覆盖特定回传批次的 103 个 study、19,931 张唯一图像。当前数据量和各用途范围按正式目录、逐图记录与实验成员核定。技术接收、组织采样、患者连接及训练准入分别核验。[数据目录](../data/catalog.md) · [公开患者来源审计](../data/patient_metadata_public_scope_audit_20261111.md)
 - 胃癌 `IMC_GC` 保留范围的 958 图已完成技术处理并正式接收。两条 MCD 采集缺完整像素，未入接收范围。患者与时间点连接以现行临床表为准，各分析按 Figure 4 协议选取患者。[Figure 4 协议](../paper/figure4_gastric_cancer.md)
