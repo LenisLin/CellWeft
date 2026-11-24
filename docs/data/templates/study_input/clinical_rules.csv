@@ -1,0 +1,14 @@
+﻿rule_id,scope,rule_zh,verification_zh
+C01,identity,一行一份生物学取样；同一患者多份sample共享patient_key,检查来源取样ID与患者ID的完整连接关系
+C02,identity,所有ID按字符串读取并保留前导零；未知patient_key留空,比较来源ID与目标ID，不从文件序号推断患者
+C03,fields,字段沿用sample模板lower_snake_case名称、类型、单位和语义；按来源选列或扩展字段并记录定义,逐个非空临床字段核对data_dictionary或field_mapping中的定义、来源及转换
+C04,missing,空白表示未知；0只能表示已确认真实零或明确事件编码,比较来源缺失值编码及目标数值零
+C05,time,区分取样时点、患者index和诊断时点；年龄字段保留对应起点,核对各变量的来源时间定义
+C06,endpoint,终点以time、time_unit、origin成组；OS/PFS/DFS保留event与event_definition,检查非空终点是否具备可解释的单位、起点和事件定义；缺口明确登记
+C07,time,月、年按来源单位保存；日期只按可核实规则计算间隔,核对转换规则及来源起点，不默认固定月天数
+C08,context,诊断、分期、治疗和疗效仅关联到来源明确的取样或index；多事件采用已定义摘要,核对摘要选择规则、事件时点及适用范围
+C09,mapping,非空目标字段保留来源字段、连接键、分类映射和转换依据,检查field_mapping对实际填充字段的覆盖
+C10,conflict,来源冲突按明确依据取舍；未解决时留空并记录问题,检查目标表、来源冲突及metadata_notes一致
+C11,vocabulary,分类值经核实后映射到词表；无法等价映射时留空并在field_mapping保存来源含义,核对分类值与来源编码的逐项对应
+C12,analysis,患者结局可关联多份sample；统计患者数与split仍按patient_key,检查同一患者样本分组及重复结局解释
+C13,source_search,追查本地metadata、归档及采集注释；公开study补查原始发布附件、论文补充临床表及作者sample/core map；private核对本地临床和标本对应表,M01及field_mapping记录实际查阅来源、连接键、样本行数及关联覆盖；本地未找到不等于来源未提供
