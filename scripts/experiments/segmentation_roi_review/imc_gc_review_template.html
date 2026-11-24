@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'">
+<title>IMC_GC · ROI与分割人工确认</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f7;color:#24323d;font:17px/1.7 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1240px;margin:auto;padding:30px 22px 80px}h1{font-size:30px;margin:8px 0}h2{font-size:22px}p{margin:10px 0}.intro,.card{background:white;border:1px solid #d9e0e6;border-radius:12px;padding:22px;margin:20px 0}.muted{font-size:15px;color:#566775}.badge{background:#edf3f6;color:#30596e;border-radius:16px;padding:3px 10px;font-size:14px}.priority{border-left:5px solid #b36b23}.toolbar{position:sticky;top:0;background:#f3f5f7ee;padding:12px 0;z-index:5;display:flex;gap:10px;align-items:center;flex-wrap:wrap}button,select,textarea{font:inherit;border:1px solid #b8c6d0;border-radius:6px;padding:8px;background:white}button{cursor:pointer;color:#15566e}button.primary{background:#15566e;color:white;border-color:#15566e}a{color:#15657e}.card>summary{cursor:pointer;font-weight:650;font-size:19px;overflow-wrap:anywhere}.card-body{padding-top:15px}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:15px}.cyan{color:#007c86}.orange{color:#ac5816}.white{background:#27333b;color:white;padding:0 5px}.controls{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin:10px 0}.overview{position:relative;max-width:820px;margin:15px auto;background:#111820}.overview img{width:100%;height:auto;display:block}.overview .edges{position:absolute;inset:0;pointer-events:none;opacity:.85}.figure{margin:15px 0}.figure img{display:block;width:100%;height:auto;background:#111820;border-radius:5px}.figure figcaption{font-size:15px;color:#52616b;margin-top:6px}.answer{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;background:#eef4f7;padding:15px;border-radius:8px;margin-top:20px}.answer label{display:flex;flex-direction:column;gap:5px;font-weight:600}.answer textarea{width:100%;min-height:70px;font-weight:400}.answer .note{flex:1;min-width:240px}.criteria{border-left:3px solid #d2b17c;padding-left:14px}.id{font-family:ui-monospace,monospace;font-size:15px;overflow-wrap:anywhere}.facts{display:flex;gap:20px;flex-wrap:wrap;font-size:15px;color:#53616c}nav{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}nav a{padding:4px 10px;border:1px solid #ccd6df;border-radius:5px;text-decoration:none}.pending{color:#8b571b}details.technical{font-size:14px;color:#586a78}.channels{font-size:15px}.tissue{max-width:900px;margin:auto}#progress{font-size:15px}.reviewed>summary:after{content:' · 已填写';color:#216a43;font-size:15px}@media(max-width:700px){main{padding:15px 10px 60px}.intro,.card{padding:15px}h1{font-size:25px}.toolbar{font-size:14px}button{font-size:14px}.answer label{width:100%}}
+dialog{width:95vw;max-width:95vw;border:1px solid #bdcbd6;border-radius:10px;padding:14px;background:#f3f5f7}dialog::backdrop{background:#14202bd9}.modal-body{overflow:auto;max-height:80vh;background:#111820;margin-top:12px}.modal-body img{display:block;max-width:none;width:auto;height:auto;image-rendering:pixelated}
+</style></head><body><main>
+<header><span class="badge">私有队列 · 本地人工确认包</span><h1>IMC_GC：ROI与细胞分割确认</h1>
+<p>优先查看 <b>R01、R02</b> 的组织范围。8张代表图覆盖三种panel；R09是已排除的空信号ROI，供您复核处置。</p></header>
+<section class="intro"><p>当前保留958张图像的技术产物已完整生成。这里请分别判断：<b>细胞是否分得合理</b>，以及<b>组织估计是否漏掉组织或纳入背景</b>。</p>
+<p class="criteria">绿色是组织估计候选，不是细胞mask。组织估计目前仍待确认；候选窗口数仅展示现算法的结果，不表示训练采样已放行。</p>
+<div class="legend"><span class="cyan">青色：DNA均值</span><span class="orange">橙色：body标记均值</span><span class="white">白线：当前细胞边界</span><span>彩色块：不同细胞实例</span></div>
+<p class="muted">信号预览统一用γ=0.5增强弱信号。局部A为最密集细胞网格，B为固定种子随机非空网格，均为224×224原生像素，以2倍最近邻展示。未知µm尺度保持未知。点击局部图可查看原尺寸。</p>
+<nav id="navigation"></nav></section>
+<div class="toolbar"><button id="accept-segmentation">批量接受8张当前分割</button><button id="export" class="primary">导出判断JSON</button><span id="progress"></span></div>
+<p class="muted">页面选择只记录反馈。完成后导出JSON，或直接在对话中按R01–R09回复；刷新前请导出保存。</p>
+<div id="cases"></div><p id="footer" class="muted"></p>
+</main><dialog id="full-image"><button id="close-image">关闭原尺寸预览</button><span id="full-image-label" class="muted"></span><div class="modal-body"><img id="full-image-pixels" alt="原尺寸对照图"></div></dialog>
+<script id="review-data" type="application/json">__REVIEW_DATA__</script>
+<script>
+const cases=JSON.parse(document.getElementById('review-data').textContent);
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const options=items=>items.map(([value,label])=>`<option value="${value}">${label}</option>`).join('');
+const segOptions=[['pending','未确认'],['accept','接受当前分割'],['resegment','需要重新分割'],['exclude','该ROI建议弃用']];
+const excludedOptions=[['pending','未确认'],['confirm_exclusion','确认继续排除'],['request_recheck','请求恢复并重新核对']];
+const tissueOptions=[['pending','未确认'],['accept','组织范围合理'],['underestimated','明显漏掉组织'],['overestimated','明显纳入背景'],['uncertain','暂时无法判断']];
+function figure(uri,label){return `<figure class="figure"><a href="#" class="full-size"><img loading="lazy" src="${uri}" alt="${escapeHTML(label)}"></a><figcaption>${escapeHTML(label)}</figcaption></figure>`;}
+function renderCase(c){
+ const retained=c.kind==='retained';
+ const scale=c.pixel_size_um===null?'µm尺度未记录，仅按原生px查看':`${c.pixel_size_um} µm/px`;
+ const details=retained?`<div class="facts"><span>${escapeHTML(c.panel_id)}</span><span>${c.shape_yx[1]}×${c.shape_yx[0]} px</span><span>${c.cell_count.toLocaleString()} 个细胞</span><span>${scale}</span></div>
+ <p class="channels">核组：${escapeHTML(c.nuclear_markers.join(' + '))}；body组：${escapeHTML(c.body_markers.join(' + '))}。各组取当前有效通道均值。</p>
+ <div class="controls"><label><input class="show-edges" type="checkbox" checked> 显示细胞轮廓</label><label>轮廓透明度 <input class="edge-opacity" type="range" min="0" max="1" step="0.05" value="0.85"></label></div>
+ <div class="overview"><img loading="lazy" src="${c.overview}" alt="${c.case_id} 整图核与胞体信号"><img class="edges" loading="lazy" src="${c.edges}" alt="当前细胞轮廓"></div>
+ <p class="muted">红框A：最密集网格；蓝框B：随机非空网格。整图用于看整体对齐，局部图用于看细胞合并、过分割与边界。</p>
+ ${figure(c.windows,'A/B同坐标局部：DNA、body、信号与细胞边界、实例mask；每个局部224×224原生像素。')}`:
+ `<p>当前状态：已移出正式input；原始来源和可恢复的input备份保留。</p><p>整图DNA与body仅见稀疏散点，未见可辨细胞结构；原始TIFF与input的DNA1、DNA2和Vimentin逐像素一致。</p>${figure(c.overview,'已排除ROI：原生通道信号概览。这里没有正式可用的细胞mask。')}`;
+ let tissueHTML='';
+ if(c.tissue_image){const t=c.tissue_estimate;tissueHTML=`<h2>组织范围：请单独判断</h2><p>绿色为候选组织，黄线为其边界。现算法覆盖画布 ${(100*t.canvas_tissue_fraction).toFixed(1)}%，得到${t.components_8}个连通区域；候选规则下${t.eligible_windows_if_reviewed}/${t.grid_windows}个窗口满足条件。请重点看组织内孔洞、边缘漏入以及背景纳入。</p><div class="tissue">${figure(c.tissue_image,'同一ROI、同一XY画布的组织估计叠图；该结果尚未标记为采样通过。')}</div>`;}
+ return `<details class="card ${c.case_id==='R01'||c.case_id==='R02'?'priority':''}" id="${c.case_id}" ${c.case_id==='R01'?'open':''}><summary>${c.case_id} · ${escapeHTML(c.priority)} <span class="id">${escapeHTML(c.image_id)}</span></summary><div class="card-body">${details}${tissueHTML}
+ <div class="answer"><label>${retained?'分割判断':'排除处置'}<select class="segmentation">${options(retained?segOptions:excludedOptions)}</select></label>${c.tissue_image?`<label>组织估计判断<select class="tissue-choice">${options(tissueOptions)}</select></label>`:''}<label class="note">备注<textarea class="notes" placeholder="可注明过分割、合并、漏组织的位置或A/B窗口"></textarea></label></div>
+ <details class="technical"><summary>ROI标识与原生坐标</summary><p>${escapeHTML(c.image_id)}</p>${retained?`<p>A：${c.windows_xyxy[0].join(', ')}；B：${c.windows_xyxy[1].join(', ')}。坐标顺序为x0,y0,x1,y1，右/下边界不含在内。</p>`:''}</details></div></details>`;
+}
+document.getElementById('navigation').innerHTML=cases.map(c=>`<a href="#${c.case_id}">${c.case_id}</a>`).join('');
+document.getElementById('cases').innerHTML=cases.map(renderCase).join('');
+document.getElementById('cases').addEventListener('click',event=>{const link=event.target.closest('a.full-size');if(!link)return;event.preventDefault();const img=link.querySelector('img');document.getElementById('full-image-pixels').src=img.src;document.getElementById('full-image-label').textContent=img.alt;document.getElementById('full-image').showModal();});
+document.getElementById('close-image').addEventListener('click',()=>document.getElementById('full-image').close());
+function collectDecisions(){return {study:'IMC_GC',review_scope:'8 stratified representatives plus excluded empty ROI',decisions:cases.map(c=>{const el=document.getElementById(c.case_id);return {case_id:c.case_id,image_id:c.image_id,kind:c.kind,source_versions:c.source_versions||null,segmentation_decision:el.querySelector('.segmentation').value,tissue_decision:el.querySelector('.tissue-choice')?.value||'not_presented',notes:el.querySelector('.notes').value};})};}
+function updateProgress(){const decisions=collectDecisions().decisions;const seg=decisions.filter(d=>d.kind==='retained'&&d.segmentation_decision!=='pending').length;const tissue=decisions.filter(d=>!['pending','not_presented'].includes(d.tissue_decision)).length;const exclusion=decisions.filter(d=>d.kind==='excluded'&&d.segmentation_decision!=='pending').length;document.getElementById('progress').textContent=`分割 ${seg}/8 · 组织 ${tissue}/4 · 排除 ${exclusion}/1`;for(const d of decisions)document.getElementById(d.case_id).classList.toggle('reviewed',d.segmentation_decision!=='pending');}
+for(const c of cases){const el=document.getElementById(c.case_id);el.querySelector('.segmentation').value=c.segmentation_decision;const tissue=el.querySelector('.tissue-choice');if(tissue)tissue.value=c.tissue_decision;el.querySelector('.notes').value=c.notes||'';el.addEventListener('change',updateProgress);const check=el.querySelector('.show-edges');if(check){const draw=()=>el.querySelector('.edges').style.opacity=check.checked?el.querySelector('.edge-opacity').value:0;check.addEventListener('change',draw);el.querySelector('.edge-opacity').addEventListener('input',draw);}}
+document.getElementById('accept-segmentation').addEventListener('click',()=>{for(const c of cases.filter(c=>c.kind==='retained'))document.getElementById(c.case_id).querySelector('.segmentation').value='accept';updateProgress();});
+document.getElementById('export').addEventListener('click',()=>{const result=collectDecisions();result.exported_at=new Date().toISOString();const url=URL.createObjectURL(new Blob([JSON.stringify(result,null,2)],{type:'application/json;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='imc_gc_user_decisions.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+document.getElementById('footer').textContent='人工判断将按ROI和来源版本记录；本页不修改正式数据。';updateProgress();
+</script></body></html>
