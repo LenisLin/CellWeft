@@ -2,7 +2,7 @@
 
 2026-10-20。复用分割 pilot 的 12 份 CP_B（Cellpose-SAM cpsam_v2）实例 mask，覆盖 **29,535 个实例**。纳入 430 个 case×蛋白 marker 通道，379 个可按当前归一化规则定量，51 个未定义；6 个 case 的纳入通道齐全、6 个存在缺口。未重新分割，未修改来源文件。
 
-[完整图文报告](/mnt/NAS_21T/ProjectData/CellWeft/results/protein_quantification_pilot_20261020/run02/report.html) · [逐图汇总](/mnt/NAS_21T/ProjectData/CellWeft/results/protein_quantification_pilot_20261020/run02/summary.csv) · [全部通道统计](/mnt/NAS_21T/ProjectData/CellWeft/results/protein_quantification_pilot_20261020/run02/channel_statistics.csv) · [51 个未定义通道](/mnt/NAS_21T/ProjectData/CellWeft/results/protein_quantification_pilot_20261020/run02/undefined_channels.csv) · [输入清单](/mnt/NAS_21T/ProjectData/CellWeft/results/protein_quantification_pilot_20261020/run02/manifest.json) · [数值核验](/mnt/NAS_21T/ProjectData/CellWeft/results/protein_quantification_pilot_20261020/run02/verification.json)
+[完整图文报告](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/protein_quantification_pilot_20261020/run02/report.html) · [逐图汇总](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/protein_quantification_pilot_20261020/run02/summary.csv) · [全部通道统计](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/protein_quantification_pilot_20261020/run02/channel_statistics.csv) · [51 个未定义通道](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/protein_quantification_pilot_20261020/run02/undefined_channels.csv) · [输入清单](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/protein_quantification_pilot_20261020/run02/manifest.json) · [数值核验](/mnt/NAS_21T/ProjectData/CellWeft/processed/_experiments/protein_quantification_pilot_20261020/run02/verification.json)
 
 ## 方法与范围
 
