@@ -10,23 +10,32 @@ from pathlib import Path
 
 from cellweft.data.preparation.segmentation import CellposeExecutor
 
-parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("tasks", type=Path, nargs="+")
-parser.add_argument("--device", default="cuda:0")
-parser.add_argument("--weights", type=Path, help="Local transport override for the same checkpoint")
-parser.add_argument("--input", type=Path, help="Signal TIFF override for a single transported task")
-parser.add_argument("--result", type=Path, help="Result JSON override for a single transported task")
-parser.add_argument("--core-size", type=int, default=1024)
-parser.add_argument("--halo", type=int, default=128)
-parser.add_argument("--match-iou", type=float, default=0.5)
-args = parser.parse_args()
-if len(args.tasks) != 1 and (args.input or args.result):
-    parser.error("Transport path overrides require one task")
+def main() -> None:
+    """Execute explicit precision-bound tasks with one persistent local model."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("tasks", type=Path, nargs="+")
+    parser.add_argument("--device", default="cuda:0")
+    parser.add_argument("--weights", type=Path, help="Local transport override for the same checkpoint")
+    parser.add_argument("--input", type=Path, help="Signal TIFF override for a single transported task")
+    parser.add_argument("--result", type=Path, help="Result JSON override for a single transported task")
+    parser.add_argument("--core-size", type=int, default=1024)
+    parser.add_argument("--halo", type=int, default=128)
+    parser.add_argument("--match-iou", type=float, default=0.5)
+    parser.add_argument("--precision", choices=["bf16", "fp32"], required=True)
+    args = parser.parse_args()
+    import torch
+    torch.set_num_threads(4)
+    if len(args.tasks) != 1 and (args.input or args.result):
+        parser.error("Transport path overrides require one task")
 
-# Decode signal tiles, run native-scale inference, and return globally labeled masks.
-with CellposeExecutor(args.device,args.core_size,args.halo,args.match_iou) as executor:
-    for path in args.tasks:
-        task = json.loads(path.read_text())
-        if args.weights:
-            task["weights"] = str(args.weights)
-        print(executor.execute(task,input_path=args.input,result_path=args.result))
+    # Decode signal tiles, run native-scale inference, and return globally labeled masks.
+    with CellposeExecutor(args.device,args.core_size,args.halo,args.match_iou,precision=args.precision) as executor:
+        for path in args.tasks:
+            task = json.loads(path.read_text())
+            if args.weights:
+                task["weights"] = str(args.weights)
+            print(executor.execute(task,input_path=args.input,result_path=args.result))
+
+
+if __name__ == "__main__":
+    main()
