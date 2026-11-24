@@ -16,7 +16,7 @@ import pandas as pd
 from cellweft.data.io.publication import resource_lock
 from cellweft.data.io.writers import write_json
 from cellweft.data.preparation.inputs import (
-    assert_reviewed_acceptance, input_binding, same_processing_binding,
+    assert_reviewed_acceptance, file_revision, input_binding, same_processing_binding,
 )
 
 
@@ -108,6 +108,8 @@ with resource_lock(ROOT):
         approval = json.loads(latest.details)
         if approval.get("training_authorization", {}).get("authority") != plan["authority"]:
             raise ValueError("Independent review has not reconciled the training authorization")
+        if approval["training_authorization"]["plan"] != file_revision(ROOT / "training_split.json"):
+            raise ValueError("Patient partition changed after independent review")
         # Scope-only changes preserve existing image, mask and quantitative products.
         for image_id in retained.image_id:
             path = ROOT / "images" / image_id / "metadata.json"
