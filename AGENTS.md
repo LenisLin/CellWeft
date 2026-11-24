@@ -3,7 +3,7 @@
 ## Start here
 
 1. Read `docs/project/status.md`, then the relevant specifications linked from `docs/README.md`.
-2. Use `docs/project/research_plan.md` for research scope and `docs/project/decisions.md` for accepted decisions. Discussion drafts and archived prompts are historical context, not execution instructions.
+2. Use `docs/project/research_plan.md` for research scope and `docs/project/decisions.md` for accepted decisions. Current specifications define execution contracts; decisions record accepted choices and their rationale.
 3. Inspect relevant code and actual outputs before changing behavior or reporting completion.
 
 ## Scope and storage
@@ -12,13 +12,14 @@
 - NAS workspace: `/mnt/NAS_21T/ProjectData/CellWeft`; datasets, manifests, protein banks, checkpoints, embeddings and generated results belong here. NAS is not a Git repository.
 - Follow `docs/architecture/storage.md` for ownership and `configs/layout.json` for directories. Create directories as needed; do not create empty placeholder files.
 - Planning, discussion and review are read-only unless implementation is requested. Preserve unrelated user work and original data.
+- Keep current specifications, accepted decisions and useful results. Consolidate active rules before deleting obsolete process material; do not create archive or history directories.
 - Keep actual patient records, private membership lists, credentials and runtime artifacts out of tracked files. Track selection rules and non-sensitive templates.
 - `reference/` is entirely local and excluded from Git. Do not force-add it, including its PDFs, source checkouts or metadata files.
 
 ## Implementation and verification
 
 - Keep reusable behavior in `src/cellweft/`; scripts orchestrate specific datasets or experiments. Source modules do not import scripts.
-- Follow the current model, training, data and editing specifications linked from docs/README.md. The research plan owns scientific scope; archived prompts are not current implementation instructions.
+- Follow the current model, training, data and editing specifications linked from docs/README.md. The research plan owns scientific scope.
 - Define observable success criteria, make the smallest necessary change, and run the narrowest meaningful checks.
 - Distinguish planned, implemented, tested, trained and biologically validated states. Report skipped or failed checks accurately.
 - Update the owning specification for contract changes; record the rationale in `decisions.md`. Update `status.md` with verified progress and the next concrete step.
